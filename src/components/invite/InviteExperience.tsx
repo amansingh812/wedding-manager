@@ -29,14 +29,16 @@ function placesFrom(view: InviteView): string {
 interface Props {
   initialView: InviteView;
   locked: boolean;
-  /** Opened on this phone before (cookie), so skip the doors. */
+  /** Opened on this phone before (cookie). */
   seenBefore: boolean;
 }
 
 export default function InviteExperience({ initialView, locked, seenBefore }: Props) {
   const [view, setView] = useState(initialView);
-  // Guests who already replied, or opened before on this phone, skip the doors.
-  const [stage, setStage] = useState<Stage>(initialView.response || seenBefore ? "content" : "sealed");
+  // The full opening plays on every visit. Guests who replied or opened before
+  // also get a shortcut straight to their ceremonies.
+  const [stage, setStage] = useState<Stage>("sealed");
+  const returning = Boolean(view.response) || seenBefore;
   const slug = view.household.slug;
   const places = useMemo(() => placesFrom(view), [view]);
   const coupleLine = `${view.wedding.title} · ${view.wedding.mainDateBs}`;
@@ -62,6 +64,7 @@ export default function InviteExperience({ initialView, locked, seenBefore }: Pr
                 markSeen();
                 go("welcome");
               }}
+              onSkipToCeremonies={returning ? () => go("content") : undefined}
             />
           )}
 
@@ -79,6 +82,13 @@ export default function InviteExperience({ initialView, locked, seenBefore }: Pr
                   <span lang="ne" className="font-deva text-[15px] text-gold-light">
                     तपाईंलाई निम्तो गरिएका कार्यक्रम
                   </span>
+                  <button
+                    type="button"
+                    onClick={() => go("sealed")}
+                    className="mt-1 self-start rounded-full border border-gold-light/50 px-3.5 py-2 text-xs font-semibold text-gold-light transition-colors hover:bg-white/10"
+                  >
+                    Watch the invitation again
+                  </button>
                 </div>
               </header>
 

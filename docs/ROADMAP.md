@@ -31,7 +31,7 @@ Reference docs:
 | 1.4 | RSVP per ceremony + headcount + veg count + blessing | ✅ |
 | 1.5 | Thank-you screen, edit RSVP, deadline lock | ✅ |
 | 1.6 | Add-to-calendar `.ics`, WhatsApp link preview (OG) | ✅ |
-| 1.7 | Returning guest skips doors; reduced-motion support | ✅ |
+| 1.7 | Opening plays every visit; returning guests get "Skip to my ceremonies"; replay button; reduced-motion support | ✅ |
 | 1.8 | Manual test on phone viewport + code review | ✅ |
 
 ## Phase 2 — Supabase connected

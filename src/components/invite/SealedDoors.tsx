@@ -8,10 +8,12 @@ interface Props {
   displayName: string;
   coupleLine: string;
   onOpened: () => void;
+  /** Shown only to returning guests. */
+  onSkipToCeremonies?: () => void;
 }
 
 /** Stage 1–2: sealed temple doors, then the doors-opening clip. */
-export default function SealedDoors({ displayName, coupleLine, onOpened }: Props) {
+export default function SealedDoors({ displayName, coupleLine, onOpened, onSkipToCeremonies }: Props) {
   const [opening, setOpening] = useState(false);
   const reduceMotion = useReducedMotion();
   const done = useRef(false);
@@ -92,6 +94,15 @@ export default function SealedDoors({ displayName, coupleLine, onOpened }: Props
             <h1 className="font-display text-[34px] leading-tight font-medium">{displayName}</h1>
           </div>
           <span className="text-[13px] text-[#ebd9b6]">Tap the seal to open</span>
+          {onSkipToCeremonies && (
+            <button
+              type="button"
+              onClick={onSkipToCeremonies}
+              className="-mt-1 rounded-full px-4 py-2.5 text-[13px] font-semibold text-gold-light underline underline-offset-4"
+            >
+              Skip to my ceremonies
+            </button>
+          )}
         </div>
       )}
       {opening && (

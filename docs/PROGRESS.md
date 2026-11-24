@@ -17,6 +17,16 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 
 ---
 
+## 2026-11-24 (night) — Opening always plays
+
+**Fixed** (family testing: "after invite it jumps straight to Your ceremonies")
+- Cause: the returning-guest rule skipped the doors once the link had been opened or answered, so re-testing the same link never showed the opening again.
+- Now the full opening (doors with the family name → doors open → Ganesh → invitation card) plays on **every** visit.
+- Returning guests get a **Skip to my ceremonies** link under the seal; the ceremonies page has **Watch the invitation again**.
+- Verified in a real Chromium on the dev server (screen recording) and with a new e2e test; 6/6 pass.
+
+---
+
 ## 2026-11-24 (evening) — Shree Ganesh in the invitation
 
 **Done** (replaces the earlier pre-door intro, per family feedback)

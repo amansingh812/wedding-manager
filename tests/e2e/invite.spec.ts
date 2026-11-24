@@ -59,14 +59,26 @@ test.describe("guest invitation", () => {
     await expect(page.getByText("Can't make it")).toBeVisible();
     await shot(page, "5-thanks");
 
-    // Coming back: no doors, answers kept.
+    // Coming back: the doors play again, with a shortcut to their ceremonies; answers kept.
     await page.reload();
+    await expect(page.getByText("A warm invitation for")).toBeVisible();
+    await page.getByRole("button", { name: "Skip to my ceremonies" }).click();
     await expect(page.getByRole("heading", { name: "Your ceremonies" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Update RSVP" })).toBeVisible();
     await expect(page.getByText(/वक्रतुण्ड महाकाय/)).toBeVisible();
     await page.getByText(/वक्रतुण्ड महाकाय/).scrollIntoViewIfNeeded();
     await shot(page, "7-closing-blessing");
     await expect(fieldsets.nth(3).getByRole("button", { name: "Can't make it" })).toHaveAttribute("aria-pressed", "true");
+  });
+
+  test("first visit has no skip link; replay button brings the doors back", async ({ page }) => {
+    await page.goto("/invite/jha-family-p7q2wd");
+    await expect(page.getByText("A warm invitation for")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Skip to my ceremonies" })).toHaveCount(0);
+    await page.getByRole("button", { name: "Open your invitation" }).click();
+    await page.getByRole("button", { name: "See your ceremonies" }).click({ timeout: 15_000 });
+    await page.getByRole("button", { name: "Watch the invitation again" }).click();
+    await expect(page.getByText("A warm invitation for")).toBeVisible();
   });
 
   test("office colleagues only see the Reception", async ({ page }) => {
