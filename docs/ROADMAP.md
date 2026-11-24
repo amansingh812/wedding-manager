@@ -25,7 +25,8 @@ Reference docs:
 |---|---|---|
 | 1.1 | `/invite/[slug]` route, invalid-link page | ✅ |
 | 1.2 | Sealed doors → doors-open video → welcome card | ✅ |
-| 1.2a | Opening blessing: 2 Shree Ganesh frames before the doors (brass idol + Mithila painting with Vakratunda shloka) | ✅ |
+| 1.2a | Doors open onto Lord Ganesh; he stays in the background while the invitation card rises over him | ✅ |
+| 1.2b | Closing blessing (Mithila Ganesh + Vakratunda shloka) at the end of the ceremonies page; Ganesh on the home page | ✅ |
 | 1.3 | Your ceremonies: only invited, BS/AD, maps, dress colours | ✅ |
 | 1.4 | RSVP per ceremony + headcount + veg count + blessing | ✅ |
 | 1.5 | Thank-you screen, edit RSVP, deadline lock | ✅ |
@@ -62,7 +63,7 @@ Reference docs:
 ## Phase 5 — Public home page
 | # | Stage | Status |
 |---|---|---|
-| 5.1 | Hero video, countdown, story, two cultures, ceremonies, venues, footer | ⬜ |
+| 5.1 | Hero video, countdown, story, two cultures, ceremonies, venues, footer — keep the Shree Ganesh opening already on the placeholder home | ⬜ |
 
 ## Phase 6 — Launch hardening
 | # | Stage | Status |

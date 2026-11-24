@@ -11,24 +11,19 @@ async function shot(page: import("@playwright/test").Page, name: string) {
 test.describe("guest invitation", () => {
   test("full journey: doors → welcome → ceremonies → RSVP → thank you → return visit", async ({ page }) => {
     await page.goto(SHARMA);
-    // Opening blessing: two Ganesh frames, then the doors.
-    await expect(page.getByText("॥ श्री गणेशाय नमः ॥")).toBeVisible();
-    await page.waitForTimeout(1600);
-    await shot(page, "0a-ganesh-idol");
-    await page.locator('section[aria-label^="Blessing"]').click();
-    await expect(page.getByText(/वक्रतुण्ड महाकाय/)).toBeVisible();
-    await page.waitForTimeout(1600);
-    await shot(page, "0b-ganesh-mithila");
-    // Moves on to the doors by itself.
-    await expect(page.getByText("A warm invitation for")).toBeVisible({ timeout: 8_000 });
+    await expect(page.getByText("A warm invitation for")).toBeVisible();
     await expect(page.getByRole("heading", { name: "Dr. R.K. Sharma & Family" })).toBeVisible();
     await shot(page, "1-sealed");
 
     await page.getByRole("button", { name: "Open your invitation" }).click();
-    // Doors clip plays (or the safety timer fires), then the welcome card shows.
-    await expect(page.getByRole("button", { name: "See your ceremonies" })).toBeVisible({ timeout: 15_000 });
-    await page.waitForTimeout(1200);
-    await shot(page, "2-welcome");
+    // Doors open onto Lord Ganesh…
+    await expect(page.getByAltText(/Lord Ganesh inside the temple courtyard/)).toBeVisible({ timeout: 15_000 });
+    await page.waitForTimeout(1800);
+    await shot(page, "2a-ganesh-reveal");
+    // …then the invitation card rises over him.
+    await expect(page.getByRole("button", { name: "See your ceremonies" })).toBeVisible({ timeout: 8_000 });
+    await page.waitForTimeout(1600);
+    await shot(page, "2b-welcome-card");
 
     await page.getByRole("button", { name: "See your ceremonies" }).click();
     await expect(page.getByRole("heading", { name: "Your ceremonies" })).toBeVisible();
@@ -68,12 +63,14 @@ test.describe("guest invitation", () => {
     await page.reload();
     await expect(page.getByRole("heading", { name: "Your ceremonies" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Update RSVP" })).toBeVisible();
+    await expect(page.getByText(/वक्रतुण्ड महाकाय/)).toBeVisible();
+    await page.getByText(/वक्रतुण्ड महाकाय/).scrollIntoViewIfNeeded();
+    await shot(page, "7-closing-blessing");
     await expect(fieldsets.nth(3).getByRole("button", { name: "Can't make it" })).toHaveAttribute("aria-pressed", "true");
   });
 
   test("office colleagues only see the Reception", async ({ page }) => {
     await page.goto(OFFICE);
-    await page.getByRole("button", { name: "Skip" }).click();
     await page.getByRole("button", { name: "Open your invitation" }).click();
     await page.getByRole("button", { name: "See your ceremonies" }).click({ timeout: 15_000 });
     await expect(page.locator("ul > li")).toHaveCount(1);

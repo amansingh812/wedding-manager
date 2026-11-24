@@ -17,16 +17,15 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 
 ---
 
-## 2026-11-24 (evening) — Opening blessing
+## 2026-11-24 (evening) — Shree Ganesh in the invitation
 
-**Done**
-- Invitation now opens with two Shree Ganesh frames before the sealed doors:
-  1. Brass Ganesh idol with marigolds and diyas, "॥ श्री गणेशाय नमः ॥" (3.4 s)
-  2. Mithila-painted Ganesh on a lotus with the Vakratunda shloka (4.6 s)
-- Frames advance on their own, a tap moves on sooner, Skip jumps to the doors; progress bar on top.
-- Returning guests (replied, or opened before on that phone) skip the blessing and the doors.
-- New images: `public/images/ganesh-idol.jpg`, `ganesh-mithila.jpg` (Higgsfield).
-- E2E test updated to walk through the blessing frames; all 5 pass.
+**Done** (replaces the earlier pre-door intro, per family feedback)
+- Sealed doors → doors-open clip → **Lord Ganesh revealed inside the courtyard** with a golden glow and "॥ श्री गणेशाय नमः ॥" (~2.8 s, tap to move on).
+- Ganesh **stays in the background**; the invitation card (household name, couple, date, places) rises over the lower half so he remains visible above it.
+- **Closing blessing** at the end of the ceremonies page: Mithila-painted Ganesh with the Vakratunda shloka.
+- **Home page** now opens with the brass Ganesh idol and "॥ श्री गणेशाय नमः ॥" (carry into the Phase 5 home page).
+- New image: `public/images/ganesh-courtyard.jpg`. Removed `GaneshIntro.tsx`.
+- E2E updated (reveal, card, closing blessing); all 5 pass.
 
 ---
 
