@@ -1,0 +1,79 @@
+# Roadmap — Wedding Manager
+
+Single source of truth for **what's done, what's in progress, and what's next**.
+Update the status column at the end of every work session, and add a line to `docs/PROGRESS.md`.
+
+Status: ✅ done · 🟡 in progress · ⬜ not started · ⏸ later (v2)
+
+Reference docs:
+- Product Requirements (v1 Final): https://claude.ai/artifact/M6rMrSuEuFmHDEZqeAVPkA
+- System Design & Database: https://claude.ai/artifact/FJ8ZZJgwfyCZ4BWjCX9CgL
+- Approved designs (canvas): https://claude.ai/artifact/RKN8872exjPiWVnbygMDuR
+
+## Phase 0 — Project setup
+| # | Stage | Status |
+|---|---|---|
+| 0.1 | Next.js 15 + TypeScript + Tailwind scaffold, self-hosted fonts | ✅ |
+| 0.2 | Supabase schema migration (10 tables, 3 views, RLS), verified on local Postgres | ✅ |
+| 0.3 | Seed data for local testing (wedding, 6 ceremonies, 3 demo households) | ✅ |
+| 0.4 | Data layer: mock store now, Supabase store in Phase 2 | ✅ |
+| 0.5 | CI: lint, typecheck, unit tests, build on every push | ✅ |
+| 0.6 | GitHub repo `amansingh812/wedding-manager` (private) | 🟡 waiting for repo |
+
+## Phase 1 — Guest invitation (runs on mock data)
+| # | Stage | Status |
+|---|---|---|
+| 1.1 | `/invite/[slug]` route, invalid-link page | ✅ |
+| 1.2 | Sealed doors → doors-open video → welcome card | ✅ |
+| 1.3 | Your ceremonies: only invited, BS/AD, maps, dress colours | ✅ |
+| 1.4 | RSVP per ceremony + headcount + veg count + blessing | ✅ |
+| 1.5 | Thank-you screen, edit RSVP, deadline lock | ✅ |
+| 1.6 | Add-to-calendar `.ics`, WhatsApp link preview (OG) | ✅ |
+| 1.7 | Returning guest skips doors; reduced-motion support | ✅ |
+| 1.8 | Manual test on phone viewport + code review | ✅ |
+
+## Phase 2 — Supabase connected
+| # | Stage | Status |
+|---|---|---|
+| 2.1 | Create Supabase project (user signs in), run migration + seed | ⬜ |
+| 2.2 | Supabase store behind the same data layer | ⬜ |
+| 2.3 | Opened tracking + RSVP writes through server actions | ⬜ |
+| 2.4 | Rate limits on RSVP and invite opens | ⬜ |
+| 2.5 | Deploy preview to Vercel (user signs in) | ⬜ |
+
+## Phase 3 — Family admin: guests & ceremonies
+| # | Stage | Status |
+|---|---|---|
+| 3.1 | Magic-link login, members & roles | ⬜ |
+| 3.2 | Ceremony editor (draft / published) | ⬜ |
+| 3.3 | Household list, add/edit, paste from Excel | ⬜ |
+| 3.4 | Ceremony matrix (tick boxes) + group shortcuts | ⬜ |
+| 3.5 | WhatsApp Send / Resend + invite status | ⬜ |
+
+## Phase 4 — Dashboard, checklists, ledger
+| # | Stage | Status |
+|---|---|---|
+| 4.1 | Overview: countdown, RSVP ring, KPIs, per-ceremony heads, nudges, blessings | ⬜ |
+| 4.2 | Ceremony checklists + starter templates + My items / Overdue | ⬜ |
+| 4.3 | Expense ledger | ⬜ |
+| 4.4 | CSV exports (plate counts, guests, expenses) | ⬜ |
+
+## Phase 5 — Public home page
+| # | Stage | Status |
+|---|---|---|
+| 5.1 | Hero video, countdown, story, two cultures, ceremonies, venues, footer | ⬜ |
+
+## Phase 6 — Launch hardening
+| # | Stage | Status |
+|---|---|---|
+| 6.1 | RLS tests, security review | ⬜ |
+| 6.2 | Performance pass (3G test, < 500 KB first screen) | ⬜ |
+| 6.3 | Backups + CSV fallback, domain, production deploy | ⬜ |
+| 6.4 | Family test with 10 relatives, then send invites (~25 Jan) | ⬜ |
+
+## Later (v2)
+| Stage | Status |
+|---|---|
+| QR photo upload at venues → Google Drive (OAuth, drive.file) | ⏸ |
+| Photo gallery on the site | ⏸ |
+| Automatic WhatsApp reminders | ⏸ |

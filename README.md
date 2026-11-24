@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wedding Manager
 
-## Getting Started
+A private web app for a family wedding: personal animated invitations sent on WhatsApp, zero-login RSVPs, and a family dashboard for guests, ceremony checklists and expenses.
 
-First, run the development server:
+Nothing couple-specific is hard-coded. Names, dates, places and wording come from the database (`weddings`, `events`), so they can be edited without a deploy.
+
+- **Status and next steps:** [`docs/ROADMAP.md`](docs/ROADMAP.md) · [`docs/PROGRESS.md`](docs/PROGRESS.md)
+- **Product requirements:** https://claude.ai/artifact/M6rMrSuEuFmHDEZqeAVPkA
+- **System design & database:** https://claude.ai/artifact/FJ8ZZJgwfyCZ4BWjCX9CgL
+- **Approved designs:** https://claude.ai/artifact/RKN8872exjPiWVnbygMDuR
+
+## Stack
+
+Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion · Supabase (Postgres, Auth, Storage) · Vercel
+
+## Run it locally
 
 ```bash
+npm install
+cp .env.example .env.local   # optional until Supabase is connected
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. In development the home page lists demo invitation links, for example:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- http://localhost:3000/invite/sharma-parivar-9k4m2x (bride side, 4 ceremonies)
+- http://localhost:3000/invite/jha-family-p7q2wd (groom side, 5 ceremonies)
+- http://localhost:3000/invite/office-tech-team-c3n8vr (Reception only)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Without Supabase env vars the app uses an in-memory demo store: RSVPs work but reset when the server restarts.
 
-## Learn More
+## Checks
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run check        # lint + typecheck + unit tests
+npm run build
+npm run test:e2e     # Playwright, phone viewport (needs: npx playwright install chromium)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project layout
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/app/invite/[slug]/     guest invitation page, RSVP server action, .ics route
+src/components/invite/     doors, welcome card, ceremony cards, RSVP form, thank-you
+src/lib/rsvp.ts            product rules (headcount caps, veg cap, deadline lock, bot detection)
+src/lib/data/              store interface, in-memory demo store, demo seed data
+supabase/migrations/       database schema, views, row-level security
+supabase/seed.sql          demo wedding for a fresh database
+tests/e2e/                 Playwright walkthrough of the guest journey
+docs/                      roadmap and progress log
+```
 
-## Deploy on Vercel
+## Privacy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Guests reach only their own household through an unguessable link. Guest reads and writes happen on the server after the slug is checked; the browser never gets database keys that can list guests. Invite pages are `noindex` and send no referrer to other sites.
