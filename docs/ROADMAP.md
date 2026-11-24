@@ -25,6 +25,7 @@ Reference docs:
 |---|---|---|
 | 1.1 | `/invite/[slug]` route, invalid-link page | ✅ |
 | 1.2 | Sealed doors → doors-open video → welcome card | ✅ |
+| 1.2a | Opening blessing: 2 Shree Ganesh frames before the doors (brass idol + Mithila painting with Vakratunda shloka) | ✅ |
 | 1.3 | Your ceremonies: only invited, BS/AD, maps, dress colours | ✅ |
 | 1.4 | RSVP per ceremony + headcount + veg count + blessing | ✅ |
 | 1.5 | Thank-you screen, edit RSVP, deadline lock | ✅ |

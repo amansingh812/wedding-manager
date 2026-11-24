@@ -11,7 +11,16 @@ async function shot(page: import("@playwright/test").Page, name: string) {
 test.describe("guest invitation", () => {
   test("full journey: doors → welcome → ceremonies → RSVP → thank you → return visit", async ({ page }) => {
     await page.goto(SHARMA);
-    await expect(page.getByText("A warm invitation for")).toBeVisible();
+    // Opening blessing: two Ganesh frames, then the doors.
+    await expect(page.getByText("॥ श्री गणेशाय नमः ॥")).toBeVisible();
+    await page.waitForTimeout(1600);
+    await shot(page, "0a-ganesh-idol");
+    await page.locator('section[aria-label^="Blessing"]').click();
+    await expect(page.getByText(/वक्रतुण्ड महाकाय/)).toBeVisible();
+    await page.waitForTimeout(1600);
+    await shot(page, "0b-ganesh-mithila");
+    // Moves on to the doors by itself.
+    await expect(page.getByText("A warm invitation for")).toBeVisible({ timeout: 8_000 });
     await expect(page.getByRole("heading", { name: "Dr. R.K. Sharma & Family" })).toBeVisible();
     await shot(page, "1-sealed");
 
@@ -64,6 +73,7 @@ test.describe("guest invitation", () => {
 
   test("office colleagues only see the Reception", async ({ page }) => {
     await page.goto(OFFICE);
+    await page.getByRole("button", { name: "Skip" }).click();
     await page.getByRole("button", { name: "Open your invitation" }).click();
     await page.getByRole("button", { name: "See your ceremonies" }).click({ timeout: 15_000 });
     await expect(page.locator("ul > li")).toHaveCount(1);

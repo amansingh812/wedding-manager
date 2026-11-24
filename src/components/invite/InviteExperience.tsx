@@ -5,13 +5,14 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { InviteView } from "@/lib/types";
 import { seenCookie } from "@/lib/rsvp";
+import GaneshIntro from "./GaneshIntro";
 import SealedDoors from "./SealedDoors";
 import WelcomeCard from "./WelcomeCard";
 import CeremonyCards from "./CeremonyCards";
 import RsvpForm from "./RsvpForm";
 import ThankYou from "./ThankYou";
 
-type Stage = "sealed" | "welcome" | "content" | "thanks";
+type Stage = "blessing" | "sealed" | "welcome" | "content" | "thanks";
 
 
 function placesFrom(view: InviteView): string {
@@ -35,7 +36,7 @@ interface Props {
 export default function InviteExperience({ initialView, locked, seenBefore }: Props) {
   const [view, setView] = useState(initialView);
   // Guests who already replied, or opened before on this phone, skip the doors.
-  const [stage, setStage] = useState<Stage>(initialView.response || seenBefore ? "content" : "sealed");
+  const [stage, setStage] = useState<Stage>(initialView.response || seenBefore ? "content" : "blessing");
   const slug = view.household.slug;
   const places = useMemo(() => placesFrom(view), [view]);
   const coupleLine = `${view.wedding.title} · ${view.wedding.mainDateBs}`;
@@ -53,6 +54,8 @@ export default function InviteExperience({ initialView, locked, seenBefore }: Pr
     <main className="mx-auto min-h-svh max-w-[480px] bg-ivory shadow-[0_0_80px_rgba(0,0,0,.5)]">
       <AnimatePresence mode="wait">
         <motion.div key={stage} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45 }}>
+          {stage === "blessing" && <GaneshIntro onDone={() => go("sealed")} />}
+
           {stage === "sealed" && (
             <SealedDoors
               displayName={view.household.displayName}

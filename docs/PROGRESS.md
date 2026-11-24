@@ -17,6 +17,19 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 
 ---
 
+## 2026-11-24 (evening) — Opening blessing
+
+**Done**
+- Invitation now opens with two Shree Ganesh frames before the sealed doors:
+  1. Brass Ganesh idol with marigolds and diyas, "॥ श्री गणेशाय नमः ॥" (3.4 s)
+  2. Mithila-painted Ganesh on a lotus with the Vakratunda shloka (4.6 s)
+- Frames advance on their own, a tap moves on sooner, Skip jumps to the doors; progress bar on top.
+- Returning guests (replied, or opened before on that phone) skip the blessing and the doors.
+- New images: `public/images/ganesh-idol.jpg`, `ganesh-mithila.jpg` (Higgsfield).
+- E2E test updated to walk through the blessing frames; all 5 pass.
+
+---
+
 ## 2026-11-24 — Phase 0 + Phase 1
 
 **Done**
