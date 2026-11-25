@@ -50,3 +50,9 @@ npm run cf:deploy    # manual deploy (needs `npx wrangler login` once)
 - 100,000 requests/day — far above what a wedding needs.
 - 10 ms CPU per request — fine today; watch the Cloudflare logs if pages ever error with 1102.
 - Images are served as-is (pre-sized ≤ 1000 px); Cloudflare image resizing is a paid add-on, not used.
+
+
+## Family login (Phase 3)
+- Cloudflare → wedding-manager → Settings → Variables: add `SUPABASE_PUBLISHABLE_KEY` (the `sb_publishable_…` key; it is safe to be public).
+- Supabase → Auth → URL Configuration: Site URL = the site, redirect = `<site>/auth/callback` (done).
+- Migration `0004_member_invites.sql`; first admin = amanpd0@gmail.com.

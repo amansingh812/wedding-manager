@@ -46,7 +46,7 @@ Reference docs:
 ## Phase 3 — Family admin: guests & ceremonies
 | # | Stage | Status |
 |---|---|---|
-| 3.1 | Magic-link login, members & roles | ⬜ |
+| 3.1 | Magic-link login, members & roles (invite-only family list) | 🟡 needs publishable key var |
 | 3.2 | Ceremony editor (draft / published) | ⬜ |
 | 3.3 | Household list, add/edit, paste from Excel | ⬜ |
 | 3.4 | Ceremony matrix (tick boxes) + group shortcuts | ⬜ |
