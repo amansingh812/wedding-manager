@@ -71,3 +71,8 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Fix: new Supabase projects don't grant table access to service_role → migration `0003_service_role_grants.sql` (applied).
 - Verified: opening /invite/jha-family-p7q2wd set open_count = 1 in Supabase.
 - Next: 2.4 rate limits, then Phase 3 (admin login, guests, WhatsApp send).
+
+## 2026-11-25 — Manual test: rate limits + family login
+- Pass: /admin and /admin/members redirect to /admin/login when signed out; /auth/callback without code → login?error=link; admin pages send noindex + no-store; invite, calendar, 404 still fine.
+- Fail: Cloudflare rate-limit binding is attached but never returned "limited" (150 sequential, 200 parallel, fixed key). Logged as 2.4 🟡.
+- Blocked: sign-in flow needs SUPABASE_PUBLISHABLE_KEY in Cloudflare variables (user).
