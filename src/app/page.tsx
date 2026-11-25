@@ -2,13 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { seedHouseholds } from "@/lib/data/seed";
 
+// Read SHOW_DEMO_LINKS at request time (Cloudflare runtime variable), not at build.
+export const dynamic = "force-dynamic";
+
 /**
  * Placeholder until the full public home page is built (Phase 5).
  * Opens with Shree Ganesh, as every auspicious beginning does.
  * In development it lists the demo invitation links for testing.
  */
 export default function Home() {
-  const isDev = process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_SHOW_DEMO_LINKS === "1";
+  const isDev = process.env.NODE_ENV !== "production" || process.env.SHOW_DEMO_LINKS === "1";
   return (
     <main className="mx-auto min-h-svh max-w-[480px] bg-ivory">
       <section aria-label="Shree Ganesh" className="relative h-[62svh] min-h-[460px] overflow-hidden bg-night">

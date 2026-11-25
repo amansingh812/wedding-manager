@@ -17,7 +17,6 @@ Checked: compressed worker is ~1.1 MiB (free limit 3 MiB); all e2e tests pass on
    3. `supabase/seed.sql` (demo wedding + 3 demo households — editable later)
 3. **Project Settings → API**, copy:
    - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
-   - `anon` public key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `service_role` secret key → `SUPABASE_SERVICE_ROLE_KEY` (**secret — never share in chat or commit**)
 
 ## Step 2 — Cloudflare Workers (≈10 min)
@@ -30,11 +29,10 @@ Checked: compressed worker is ~1.1 MiB (free limit 3 MiB); all e2e tests pass on
 3. **Variables and secrets** (Settings → Variables and Secrets), add for both build and runtime:
    | Name | Type | Value |
    |---|---|---|
-   | `NEXT_PUBLIC_SUPABASE_URL` | Text | from Supabase |
-   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Text | from Supabase |
+   | `SUPABASE_URL` | Text | `https://uzmzuwcpykegddokhybd.supabase.co` |
    | `SUPABASE_SERVICE_ROLE_KEY` | **Secret** | from Supabase |
-   | `NEXT_PUBLIC_SITE_URL` | Text | `https://wedding-manager.<your-subdomain>.workers.dev` |
-   | `NEXT_PUBLIC_SHOW_DEMO_LINKS` | Text | `1` while testing, `0` before sending invites |
+   | `SITE_URL` | Text | `https://wedding-manager.amanpd0.workers.dev` |
+   | `SHOW_DEMO_LINKS` | Text | `1` while testing, `0` before sending invites |
 4. Deploy. Every push to `main` redeploys automatically.
 
 Test: open `https://wedding-manager.<your-subdomain>.workers.dev/invite/sharma-parivar-9k4m2x` on your phone.

@@ -5,7 +5,7 @@
  */
 export const site = {
   appName: "Wedding Manager",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.SITE_URL ?? "http://localhost:3000",
   /** Background music for the invite. null = no music button (add a licensed track later). */
   musicSrc: null as string | null,
   /** RSVP form on the invite. Off for now: the invite only shows ceremonies. Flip to true to bring it back. */

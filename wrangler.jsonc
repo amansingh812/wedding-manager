@@ -8,5 +8,9 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // keep variables/secrets set in the Cloudflare dashboard across git deploys
+  "keep_vars": true,
+  "workers_dev": true,
+  "preview_urls": true
 }
