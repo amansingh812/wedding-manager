@@ -18,7 +18,20 @@ export async function allow(name: LimitName, key: string): Promise<boolean> {
     const limiter = env[name];
     if (!limiter) return true;
     return (await limiter.limit({ key })).success;
-  } catch {
+  } catch (e) {
+    console.error("rate limiter failed", e);
     return true; // never block guests because the limiter itself failed
+  }
+}
+
+/** For /api/health: is the binding reachable, and what IP does the worker see? */
+export async function limiterStatus(h: Headers): Promise<string> {
+  try {
+    const env = getCloudflareContext().env as unknown as Record<string, Limiter | undefined>;
+    if (!env.INVITE_LIMITER) return "no binding";
+    const ip = clientIp(h);
+    return `bound; ip=${ip.replace(/[\d]+$/, "x")}`;
+  } catch (e) {
+    return `context error: ${(e as Error).message}`;
   }
 }

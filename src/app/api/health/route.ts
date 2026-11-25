@@ -1,9 +1,11 @@
 import { getStore, usingSupabase } from "@/lib/data/store";
+import { limiterStatus } from "@/lib/ratelimit";
+import { authConfigured } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
 /** Which data source is live, and whether a demo invite loads. Never returns key values. */
-export async function GET() {
+export async function GET(req: Request) {
   let invite: string;
   try {
     const v = await getStore().getInvite("sharma-parivar-9k4m2x");
@@ -17,5 +19,7 @@ export async function GET() {
     hasSupabaseUrl: Boolean(process.env.SUPABASE_URL),
     hasServiceKey: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
     invite,
+    login: authConfigured() ? "configured" : "missing SUPABASE_PUBLISHABLE_KEY",
+    limiter: await limiterStatus(req.headers),
   });
 }
