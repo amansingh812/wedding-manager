@@ -9,7 +9,7 @@ async function shot(page: import("@playwright/test").Page, name: string) {
 }
 
 test.describe("guest invitation", () => {
-  test("full journey: doors → welcome → ceremonies → RSVP → thank you → return visit", async ({ page }) => {
+  test("full journey: doors → Ganesh → invitation card → ceremonies (no RSVP)", async ({ page }) => {
     await page.goto(SHARMA);
     await expect(page.getByText("A warm invitation for")).toBeVisible();
     await expect(page.getByRole("heading", { name: "Dr. R.K. Sharma & Family" })).toBeVisible();
@@ -35,40 +35,11 @@ test.describe("guest invitation", () => {
     await expect(page.getByRole("heading", { name: /Baraat/ })).toHaveCount(0);
     await shot(page, "3-ceremonies");
 
-    // Submitting without answers shows a friendly error.
-    await page.getByRole("button", { name: "Send RSVP" }).click();
-    await expect(page.locator("#rsvp-error")).toContainText("Please choose for");
-
-    const fieldsets = page.locator("fieldset");
-    await fieldsets.nth(0).getByRole("button", { name: "Will attend" }).click();
-    await fieldsets.nth(1).getByRole("button", { name: "Will attend" }).click();
-    await fieldsets.nth(2).getByRole("button", { name: "Will attend" }).click();
-    await fieldsets.nth(3).getByRole("button", { name: "Can't make it" }).click();
-
-    // Headcount can't pass the household limit of 4.
-    const more = fieldsets.nth(2).getByRole("button", { name: /More: People coming/ });
-    for (let i = 0; i < 5; i++) if (await more.isEnabled()) await more.click();
-    await expect(fieldsets.nth(2)).toContainText("4 / 4");
-
-    await page.getByRole("button", { name: "More: Vegetarian meals" }).click();
-    await page.getByLabel(/A blessing for the couple/).fill("Sukhi dampatya jiwan ko shubhakamana!");
-    await shot(page, "4-rsvp-filled");
-
-    await page.getByRole("button", { name: "Send RSVP" }).click();
-    await expect(page.getByRole("heading", { name: /celebrate with you/ })).toBeVisible();
-    await expect(page.getByText("Can't make it")).toBeVisible();
-    await shot(page, "5-thanks");
-
-    // Coming back: the doors play again, with a shortcut to their ceremonies; answers kept.
-    await page.reload();
-    await expect(page.getByText("A warm invitation for")).toBeVisible();
-    await page.getByRole("button", { name: "Skip to my ceremonies" }).click();
-    await expect(page.getByRole("heading", { name: "Your ceremonies" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Update RSVP" })).toBeVisible();
-    await expect(page.getByText(/वक्रतुण्ड महाकाय/)).toBeVisible();
+    // RSVP is switched off for now (site.rsvpEnabled = false).
+    await expect(page.getByRole("button", { name: "Send RSVP" })).toHaveCount(0);
+    await expect(page.getByText("Will you join us?")).toHaveCount(0);
     await page.getByText(/वक्रतुण्ड महाकाय/).scrollIntoViewIfNeeded();
     await shot(page, "7-closing-blessing");
-    await expect(fieldsets.nth(3).getByRole("button", { name: "Can't make it" })).toHaveAttribute("aria-pressed", "true");
   });
 
   test("first visit has no skip link; replay button brings the doors back", async ({ page }) => {

@@ -10,6 +10,7 @@ import WelcomeCard from "./WelcomeCard";
 import CeremonyCards from "./CeremonyCards";
 import RsvpForm from "./RsvpForm";
 import ThankYou from "./ThankYou";
+import { site } from "@/config/site";
 import ClosingBlessing from "./ClosingBlessing";
 
 type Stage = "sealed" | "welcome" | "content" | "thanks";
@@ -95,6 +96,7 @@ export default function InviteExperience({ initialView, locked, seenBefore }: Pr
               <div className="relative -mt-[34px] flex flex-col gap-[18px] px-[18px]">
                 <CeremonyCards ceremonies={view.ceremonies} slug={slug} />
 
+                {site.rsvpEnabled && (
                 <section aria-labelledby="rsvp-title" className="mt-4 flex flex-col gap-3.5">
                   <div className="relative overflow-hidden rounded-3xl">
                     <Image src="/images/hands.jpg" alt="" width={444} height={180} className="h-[150px] w-full object-cover object-[center_60%]" />
@@ -118,6 +120,7 @@ export default function InviteExperience({ initialView, locked, seenBefore }: Pr
                     }}
                   />
                 </section>
+                )}
 
                 <ClosingBlessing />
               </div>

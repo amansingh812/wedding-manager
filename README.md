@@ -4,6 +4,7 @@ A private web app for a family wedding: personal animated invitations sent on Wh
 
 Nothing couple-specific is hard-coded. Names, dates, places and wording come from the database (`weddings`, `events`), so they can be edited without a deploy.
 
+- **Project status (start here):** [`STATUS.md`](STATUS.md)
 - **Status and next steps:** [`docs/ROADMAP.md`](docs/ROADMAP.md) · [`docs/PROGRESS.md`](docs/PROGRESS.md)
 - **Product requirements:** https://claude.ai/artifact/M6rMrSuEuFmHDEZqeAVPkA
 - **System design & database:** https://claude.ai/artifact/FJ8ZZJgwfyCZ4BWjCX9CgL

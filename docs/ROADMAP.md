@@ -28,7 +28,7 @@ Reference docs:
 | 1.2a | Doors open onto Lord Ganesh; he stays in the background while the invitation card rises over him | ✅ |
 | 1.2b | Closing blessing (Mithila Ganesh + Vakratunda shloka) at the end of the ceremonies page; Ganesh on the home page | ✅ |
 | 1.3 | Your ceremonies: only invited, BS/AD, maps, dress colours | ✅ |
-| 1.4 | RSVP per ceremony + headcount + veg count + blessing | ✅ |
+| 1.4 | RSVP per ceremony + headcount + veg count + blessing (built; hidden via `site.rsvpEnabled = false`) | ⏸ |
 | 1.5 | Thank-you screen, edit RSVP, deadline lock | ✅ |
 | 1.6 | Add-to-calendar `.ics`, WhatsApp link preview (OG) | ✅ |
 | 1.7 | Opening plays every visit; returning guests get "Skip to my ceremonies"; replay button; reduced-motion support | ✅ |
