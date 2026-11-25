@@ -64,3 +64,10 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - No rate limiting yet (Phase 2.4).
 - Music button hidden until a licensed shehnai / panche baja track is chosen (`site.musicSrc`).
 - Ceremony dates other than Bibah and venue names are placeholders in seed data.
+
+## 2026-11-25 — Phase 2 live
+- Cloudflare Workers deploys from GitHub on every push to main.
+- Live: https://wedding-manager.amanpd0.workers.dev — reads Supabase (`/api/health` → store: supabase, invite ok).
+- Fix: new Supabase projects don't grant table access to service_role → migration `0003_service_role_grants.sql` (applied).
+- Verified: opening /invite/jha-family-p7q2wd set open_count = 1 in Supabase.
+- Next: 2.4 rate limits, then Phase 3 (admin login, guests, WhatsApp send).
