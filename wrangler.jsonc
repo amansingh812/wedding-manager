@@ -11,6 +11,12 @@
   "observability": { "enabled": true },
   // keep variables/secrets set in the Cloudflare dashboard across git deploys
   "keep_vars": true,
+  // non-secret runtime settings (the Supabase service key is a dashboard Secret)
+  "vars": {
+    "SUPABASE_URL": "https://uzmzuwcpykegddokhybd.supabase.co",
+    "SITE_URL": "https://wedding-manager.amanpd0.workers.dev",
+    "SHOW_DEMO_LINKS": "1"
+  },
   "workers_dev": true,
   "preview_urls": true
 }
