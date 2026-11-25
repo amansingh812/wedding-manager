@@ -18,7 +18,7 @@ function db(): SupabaseClient {
   return client;
 }
 
-type EventRow = {
+export type EventRow = {
   id: string; kind: string | null; name: string; subtitle: string | null; event_date: string; date_bs: string;
   starts_at: string | null; ends_at: string | null; venue_name: string | null; venue_city: string | null;
   address: string | null; map_url: string | null; dress_code: string | null; dress_colors: string[] | null;
@@ -27,7 +27,7 @@ type EventRow = {
 
 const hhmm = (t: string | null) => (t ? t.slice(0, 5) : null);
 
-function toCeremony(e: EventRow): Ceremony {
+export function toCeremony(e: EventRow): Ceremony {
   return {
     id: e.id, kind: e.kind, name: e.name, subtitle: e.subtitle, eventDate: e.event_date, dateBs: e.date_bs,
     startsAt: hhmm(e.starts_at), endsAt: hhmm(e.ends_at), venueName: e.venue_name, venueCity: e.venue_city,

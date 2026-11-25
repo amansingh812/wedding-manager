@@ -30,6 +30,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
           <Link href="/admin" className="font-display text-xl text-maroon">{member.weddingTitle}</Link>
           <nav className="flex items-center gap-4 text-sm font-semibold text-muted">
+            <Link href="/admin/ceremonies" className="hover:text-sindoor">Ceremonies</Link>
             <Link href="/admin/members" className="hover:text-sindoor">Family</Link>
             <form action={signOut}><button className="hover:text-sindoor">Sign out</button></form>
           </nav>

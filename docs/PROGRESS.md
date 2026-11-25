@@ -81,3 +81,7 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Critical: magic links only go to emails on the family list (`login_allowed`, migration 0005, applied). Strangers get the same reply but no email and no account.
 - Membership lookup cached per request (was 2–3 Supabase calls per page).
 - Checked: dashboard views use security_invoker; every table has RLS policies; secret key only on server.
+
+## 2026-11-25 — Phase 3.2 ceremony editor
+- /admin/ceremonies list (Published/Draft, missing-field hints) and /admin/ceremonies/[id] form (validated: times, https map link, hex colours). Admin-only writes, also enforced by RLS.
+- Live test blocked on SUPABASE_PUBLISHABLE_KEY (login).
