@@ -30,7 +30,8 @@ export async function limiterStatus(h: Headers): Promise<string> {
     const env = getCloudflareContext().env as unknown as Record<string, Limiter | undefined>;
     if (!env.INVITE_LIMITER) return "no binding";
     const ip = clientIp(h);
-    return `bound; ip=${ip.replace(/[\d]+$/, "x")}`;
+    const probe = await env.INVITE_LIMITER.limit({ key: "health-probe" });
+    return `bound; ip=${ip.replace(/[\d]+$/, "x")}; probe=${probe.success ? "allowed" : "limited"}`;
   } catch (e) {
     return `context error: ${(e as Error).message}`;
   }
