@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { authConfigured, createAuthClient, getMembership } from "@/lib/supabase/server";
 import { allow, clientIp } from "@/lib/ratelimit";
+import { createClient } from "@supabase/supabase-js";
 
 export type FormState = { ok?: boolean; error?: string; message?: string };
 
@@ -18,6 +19,17 @@ export async function sendMagicLink(_: FormState, form: FormData): Promise<FormS
   if (!(await allow("RSVP_LIMITER", `login:${clientIp(await headers())}`))) {
     return { error: "Too many tries. Please wait a minute." };
   }
+  const sent = { ok: true, message: `If ${email.data} is on the family list, a sign-in link is on its way. Check your inbox.` };
+  // Only email people on the family list, so the site can't be used to spam strangers.
+  const service = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+  const { data: allowed, error: checkError } = await service.rpc("login_allowed", { p_email: email.data });
+  if (checkError) {
+    console.error("login_allowed", checkError.message);
+    return { error: "Couldn't send the link right now. Please try again in a few minutes." };
+  }
+  if (!allowed) return sent; // same reply either way: don't reveal who's on the list
   const sb = await createAuthClient();
   const base = process.env.SITE_URL || "";
   const { error } = await sb.auth.signInWithOtp({
@@ -28,8 +40,7 @@ export async function sendMagicLink(_: FormState, form: FormData): Promise<FormS
     console.error("signInWithOtp", error.message);
     return { error: "Couldn't send the link right now. Please try again in a few minutes." };
   }
-  // Same reply whether or not the email belongs to the family (don't reveal who's invited).
-  return { ok: true, message: `If ${email.data} is on the family list, a sign-in link is on its way. Check your inbox.` };
+  return sent;
 }
 
 export async function signOut() {

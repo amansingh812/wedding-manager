@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
 /** True when family login is configured (publishable key present at runtime). */
 export function authConfigured(): boolean {
@@ -35,7 +36,7 @@ export type Membership = {
 };
 
 /** The signed-in user's membership, or null if signed out / not a member. */
-export async function getMembership(): Promise<{ email: string | null; member: Membership | null }> {
+export const getMembership = cache(async (): Promise<{ email: string | null; member: Membership | null }> => {
   const sb = await createAuthClient();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return { email: null, member: null };
@@ -57,4 +58,4 @@ export async function getMembership(): Promise<{ email: string | null; member: M
       email: user.email ?? "",
     },
   };
-}
+});

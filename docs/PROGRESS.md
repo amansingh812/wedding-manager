@@ -76,3 +76,8 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Pass: /admin and /admin/members redirect to /admin/login when signed out; /auth/callback without code → login?error=link; admin pages send noindex + no-store; invite, calendar, 404 still fine.
 - Fail: Cloudflare rate-limit binding is attached but never returned "limited" (150 sequential, 200 parallel, fixed key). Logged as 2.4 🟡.
 - Blocked: sign-in flow needs SUPABASE_PUBLISHABLE_KEY in Cloudflare variables (user).
+
+## 2026-11-25 — Code review fixes (Phase 3.1)
+- Critical: magic links only go to emails on the family list (`login_allowed`, migration 0005, applied). Strangers get the same reply but no email and no account.
+- Membership lookup cached per request (was 2–3 Supabase calls per page).
+- Checked: dashboard views use security_invoker; every table has RLS policies; secret key only on server.
