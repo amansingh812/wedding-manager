@@ -1,6 +1,6 @@
 # Project Status — Wedding Manager
 
-_Last updated: 25 Nov 2026_
+_Last updated: 25 Nov 2026 (Phase 2 started)_
 
 One page to see what's done, what's pending and what's waiting on someone.
 Details per stage: [`docs/ROADMAP.md`](docs/ROADMAP.md) · session notes: [`docs/PROGRESS.md`](docs/PROGRESS.md)
@@ -11,7 +11,7 @@ Details per stage: [`docs/ROADMAP.md`](docs/ROADMAP.md) · session notes: [`docs
 |---|---|---|
 | 0 | Project setup (code, database design, tests, GitHub) | ✅ Done |
 | 1 | Guest invitation (doors → Ganesh → invitation card → ceremonies) | ✅ Done (RSVP hidden for now) |
-| 2 | Connect Supabase + first online preview on Vercel | ⬜ Not started — **waiting on you** |
+| 2 | Connect Supabase + first online preview on **Cloudflare Workers** | 🟡 Code ready — **waiting on you** (see `docs/DEPLOY.md`) |
 | 3 | Family admin: login, ceremonies, guest list, WhatsApp send | ⬜ Not started |
 | 4 | Dashboard, ceremony checklists, expense ledger, CSV export | ⬜ Not started |
 | 5 | Public home page (opens with Shree Ganesh) | ⬜ Not started |
@@ -30,14 +30,17 @@ Details per stage: [`docs/ROADMAP.md`](docs/ROADMAP.md) · session notes: [`docs
 
 ## 🟡 Pending — next up (Phase 2)
 
-- [ ] Create Supabase project and load the database
-- [ ] Switch the app from demo data to Supabase
-- [ ] Deploy a preview on Vercel and test on real phones
+- [x] Hosting moved to Cloudflare Workers (Vercel paused till 20 Dec) — adapter set up, tested on Cloudflare runtime
+- [x] Supabase connection code + RSVP/open-tracking database functions (tested on local Postgres)
+- [ ] Create Supabase project and run the 3 SQL files — **you** (docs/DEPLOY.md step 1)
+- [ ] Connect GitHub repo in Cloudflare and add keys — **you** (docs/DEPLOY.md step 2)
+- [ ] Test the live link on real phones
+- [ ] Rate limits on invite opens
 
 ## ⏳ Waiting on you
 
-- [ ] **Sign up / sign in to Supabase** (free) — needed to start Phase 2
-- [ ] **Sign in to Vercel** with GitHub — needed for the preview link
+- [ ] **Supabase**: create project, run SQL (docs/DEPLOY.md step 1)
+- [ ] **Cloudflare**: import the GitHub repo, add keys (docs/DEPLOY.md step 2)
 - [ ] Confirm dates, times and venue names for every ceremony (only Bibah, 28 Feb, is confirmed)
 - [ ] Pandit ji's puja samagri list per ceremony (for checklists)
 - [ ] Choose domain name (e.g. nirajandeepa.com)

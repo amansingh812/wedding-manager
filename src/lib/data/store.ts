@@ -1,11 +1,11 @@
 import "server-only";
 import type { InviteView, RsvpSubmission } from "@/lib/types";
 import { mockStore } from "./mock-store";
+import { supabaseStore } from "./supabase-store";
 
 /**
  * Everything the guest invitation needs from storage.
- * Phase 1 uses the in-memory mock store. Phase 2 adds a Supabase store
- * with the same interface, selected when SUPABASE env vars are present.
+ * Uses Supabase when its env vars are set, otherwise the in-memory demo store.
  */
 export interface InviteStore {
   getInvite(slug: string): Promise<InviteView | null>;
@@ -13,6 +13,10 @@ export interface InviteStore {
   saveRsvp(slug: string, submission: RsvpSubmission): Promise<InviteView>;
 }
 
+export function usingSupabase(): boolean {
+  return Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+}
+
 export function getStore(): InviteStore {
-  return mockStore;
+  return usingSupabase() ? supabaseStore : mockStore;
 }

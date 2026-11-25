@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Cloudflare's image resizing is a paid add-on; our images are pre-sized for phones.
+  images: { unoptimized: true },
   async headers() {
     return [
       {
@@ -23,3 +25,7 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+// Lets `next dev` use Cloudflare bindings locally.
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+initOpenNextCloudflareForDev();
