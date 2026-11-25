@@ -1,6 +1,6 @@
 # Project Status — Wedding Manager
 
-_Last updated: 25 Nov 2026 (Phase 2 started)_
+_Last updated: 25 Nov 2026 (Phase 2 LIVE — Cloudflare + Supabase; rate limits pending)_
 
 One page to see what's done, what's pending and what's waiting on someone.
 Details per stage: [`docs/ROADMAP.md`](docs/ROADMAP.md) · session notes: [`docs/PROGRESS.md`](docs/PROGRESS.md)
