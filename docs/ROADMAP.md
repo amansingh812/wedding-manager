@@ -37,10 +37,10 @@ Reference docs:
 ## Phase 2 — Supabase connected
 | # | Stage | Status |
 |---|---|---|
-| 2.1 | Create Supabase project (user), run migrations + seed | ✅ waiting on user |
+| 2.1 | Create Supabase project (user), run migrations + seed | ✅ |
 | 2.2 | Supabase store behind the same data layer | ✅ |
 | 2.3 | Opened tracking + RSVP writes (DB functions `mark_invite_opened`, `save_rsvp`) | ✅ |
-| 2.4 | Rate limits on RSVP and invite opens | ⬜ |
+| 2.4 | Rate limits (Cloudflare binding): opens + calendar 60/min, RSVP 10/min per IP | ✅ |
 | 2.5 | Deploy to Cloudflare Workers via OpenNext (Vercel paused) — config done, user connects repo | ✅ |
 
 ## Phase 3 — Family admin: guests & ceremonies

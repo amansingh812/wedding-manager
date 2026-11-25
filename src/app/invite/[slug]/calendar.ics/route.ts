@@ -1,9 +1,13 @@
 import { getStore } from "@/lib/data/store";
 import { buildIcs } from "@/lib/ics";
+import { allow, clientIp } from "@/lib/ratelimit";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(req: Request, { params }: { params: Promise<{ slug: string }> }) {
+  if (!(await allow("INVITE_LIMITER", clientIp(req.headers)))) {
+    return new Response("Too many requests", { status: 429, headers: { "Retry-After": "60" } });
+  }
   const { slug } = await params;
   const view = await getStore().getInvite(slug);
   if (!view) return new Response("Not found", { status: 404 });

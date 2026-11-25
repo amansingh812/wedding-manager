@@ -2,6 +2,8 @@
 
 import { getStore } from "@/lib/data/store";
 import { RsvpError, SLUG_RE, submissionSchema } from "@/lib/rsvp";
+import { headers } from "next/headers";
+import { allow, clientIp } from "@/lib/ratelimit";
 import type { InviteView } from "@/lib/types";
 
 export type RsvpResult = { ok: true; view: InviteView } | { ok: false; error: string };
@@ -9,6 +11,9 @@ export type RsvpResult = { ok: true; view: InviteView } | { ok: false; error: st
 export async function submitRsvp(slug: string, raw: unknown): Promise<RsvpResult> {
   if (typeof slug !== "string" || !SLUG_RE.test(slug)) {
     return { ok: false, error: "This invitation link isn't valid." };
+  }
+  if (!(await allow("RSVP_LIMITER", clientIp(await headers())))) {
+    return { ok: false, error: "Too many tries. Please wait a minute and try again." };
   }
   const parsed = submissionSchema.safeParse(raw);
   if (!parsed.success) return { ok: false, error: "Something in the form didn't look right. Please try again." };

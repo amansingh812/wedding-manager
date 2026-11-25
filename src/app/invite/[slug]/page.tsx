@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getStore } from "@/lib/data/store";
 import { isPreviewBot, isRsvpLocked, seenCookie } from "@/lib/rsvp";
 import { formatAdLong } from "@/lib/format";
+import { allow, clientIp } from "@/lib/ratelimit";
 import InviteExperience from "@/components/invite/InviteExperience";
 
 export const dynamic = "force-dynamic";
@@ -33,8 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function InvitePage({ params }: Props) {
   const { slug } = await params;
   const store = getStore();
-  const ua = (await headers()).get("user-agent");
-  if (!isPreviewBot(ua)) await store.markOpened(slug);
+  const h = await headers();
+  // over the limit: still show the invite, just don't count the open
+  if (!isPreviewBot(h.get("user-agent")) && (await allow("INVITE_LIMITER", clientIp(h)))) {
+    await store.markOpened(slug);
+  }
   const view = await store.getInvite(slug);
   if (!view) notFound();
 
