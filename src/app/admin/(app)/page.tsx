@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Wedding admin" };
 const SECTIONS = [
   { title: "Family", body: "Who can sign in and help", href: "/admin/members", ready: true },
   { title: "Ceremonies", body: "Dates, venues, dress colours", href: "/admin/ceremonies", ready: true },
-  { title: "Guests", body: "Households and who's invited where", ready: false },
+  { title: "Guests", body: "Households and who's invited where", href: "/admin/guests", ready: true },
   { title: "Send invites", body: "WhatsApp links and status", ready: false },
 ];
 
