@@ -113,17 +113,27 @@ export async function importGuests(_: ImportState, form: FormData): Promise<Impo
   if (form.get("mode") !== "import") return { rows: preview };
 
   const events = await validEventIds(sb, member.weddingId, form.getAll("events"));
+  // One insert for all households + one for all invitations: Cloudflare's free plan allows
+  // only 50 outside calls per request, so a call per row would fail on big lists.
+  const good = preview.filter((r) => !r.problems.length && !r.duplicate);
   let imported = 0;
-  for (const r of preview) {
-    if (r.problems.length || r.duplicate) continue;
-    const id = await insertHousehold(
-      sb,
-      { wedding_id: member.weddingId, display_name: r.displayName, phone_e164: r.phone, side: r.side, max_guests: r.maxGuests, group_tag: r.groupTag },
-      r.displayName,
-    );
-    if (!id) continue;
-    if (events.length) await sb.from("invitations").insert(events.map((event_id) => ({ household_id: id, event_id })));
-    imported++;
+  for (let attempt = 0; attempt < 3 && good.length; attempt++) {
+    const { data, error } = await sb
+      .from("households")
+      .insert(good.map((r) => ({
+        wedding_id: member.weddingId, display_name: r.displayName, phone_e164: r.phone, side: r.side,
+        max_guests: r.maxGuests, group_tag: r.groupTag, slug: makeSlug(r.displayName),
+      })))
+      .select("id");
+    if (error?.code === "23505") continue; // a random slug collided: whole batch rolled back, retry with new slugs
+    if (error) { console.error("import households", error.message); return { error: "Couldn't add the guests. Please try again." }; }
+    const ids = (data ?? []).map((h) => h.id as string);
+    if (events.length && ids.length) {
+      const { error: invErr } = await sb.from("invitations").insert(ids.flatMap((household_id) => events.map((event_id) => ({ household_id, event_id }))));
+      if (invErr) console.error("import invitations", invErr.message);
+    }
+    imported = ids.length;
+    break;
   }
   revalidatePath("/admin/guests");
   return { imported, skipped: preview.length - imported };
