@@ -103,3 +103,8 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Grid: ticked Office→Mehendi, survived reload; shortcut "Remove both/friends from Mehendi" undid it and grid refreshed. Fixed: shortcut note vanished on refresh.
 - Send: message preview fills {link}; "Copy message" (no phone) marked Office sent, filter moved it. WhatsApp button builds wa.me (unit-tested); not clicked live, to avoid messaging a real number.
 - Demo data note: Office – Tech Team now shows "sent".
+
+## 2026-11-26 — Full code review + recorded walkthrough
+- Critical fix: paste-import did 2 DB calls per row → would fail past ~20 rows on Cloudflare free plan (50 subrequests/request). Now 2 calls total. Verified live: 40 households + 240 invitations in one go. Test rows deleted.
+- Reviewed OK: every action checks membership + wedding scope (RLS backs it); notes never reach guests; WhatsApp text encoded.
+- Walkthrough recorded (guest invite → admin home → paste 40 → guests → grid → send → ceremonies): wedding-manager-walkthrough.gif in user's Downloads.
