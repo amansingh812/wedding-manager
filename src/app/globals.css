@@ -67,3 +67,51 @@ body {
   outline: 3px solid var(--color-gold);
   outline-offset: 2px;
 }
+
+/* ───────── Admin: Claude Design dashboard look (shared by every admin page) ───────── */
+.admin { color: #2A1A14; }
+/* cards */
+.admin .bg-white { background-color: #FFFBF3; }
+.admin .border-sand { border-color: #EADBC0; }
+.admin .divide-sand\/70 > :not(:last-child), .admin .divide-sand\/60 > :not(:last-child) { border-color: #F0E4CC; }
+.admin .rounded-2xl { border-radius: 20px; }
+/* headings */
+.admin main h1.font-display { font-weight: 600; color: #3A0A0C; }
+/* text fields: soft cream, gold focus ring */
+.admin input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+.admin textarea,
+.admin select {
+  background-color: #FFFBF3;
+  border: 1px solid #E2CFAB;
+  color: #2A1A14;
+  min-height: 46px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.admin input:not([type="checkbox"]):not([type="radio"]):hover,
+.admin textarea:hover, .admin select:hover { border-color: #C9A24A; }
+.admin input:not([type="checkbox"]):not([type="radio"]):focus,
+.admin textarea:focus, .admin select:focus {
+  outline: none;
+  border-color: #C9A24A;
+  box-shadow: 0 0 0 3px rgba(201, 162, 74, .22);
+}
+.admin input::placeholder, .admin textarea::placeholder { color: #A08A72; }
+/* dropdowns: custom chevron, no grey OS look */
+.admin select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.5rem !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238A6A3B' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .9rem center;
+  cursor: pointer;
+}
+.admin input[type="checkbox"] { accent-color: #8E1B1B; cursor: pointer; }
+/* buttons & links: smooth hovers, 44px targets */
+.admin button, .admin a { transition: background-color .15s, color .15s, border-color .15s, box-shadow .15s, transform .15s; }
+.admin button:not(:disabled) { cursor: pointer; }
+.admin main .bg-sindoor:hover:not(:disabled) { background-color: #6E1316; }
+.admin main .rounded-full.border:hover { border-color: #C9A24A; background-color: #FFF4DC; }
+.admin main a.rounded-2xl.border:hover, .admin main a.block.rounded-2xl:hover { border-color: #C9A24A; box-shadow: 0 6px 20px -12px rgba(58,10,12,.35); }
+.admin main li > a:hover { background-color: #FDF6E8; }
+.admin :focus-visible { outline: 2px solid #C9A24A; outline-offset: 2px; }

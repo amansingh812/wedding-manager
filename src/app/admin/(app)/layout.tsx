@@ -1,4 +1,4 @@
-import Link from "next/link";
+import AdminNav from "@/components/admin/AdminNav";
 import { redirect } from "next/navigation";
 import { signOut } from "@/app/admin/actions";
 import { authConfigured, getMembership } from "@/lib/supabase/server";
@@ -25,24 +25,21 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="min-h-svh bg-ivory">
-      <header className="sticky top-0 z-10 border-b border-sand/70 bg-ivory/95 backdrop-blur">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
-          <Link href="/admin" className="font-display text-xl text-maroon">{member.weddingTitle}</Link>
-          <nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-1 text-sm font-semibold text-muted">
-            <Link href="/admin/guests" className="hover:text-sindoor">Guests</Link>
-            <Link href="/admin/matrix" className="hover:text-sindoor">Grid</Link>
-            <Link href="/admin/send" className="hover:text-sindoor">Send</Link>
-            <Link href="/admin/ceremonies" className="hover:text-sindoor">Ceremonies</Link>
-            <Link href="/admin/checklists" className="hover:text-sindoor">Checklists</Link>
-            <Link href="/admin/expenses" className="hover:text-sindoor">Expenses</Link>
-            <Link href="/admin/members" className="hover:text-sindoor">Family</Link>
-            <Link href="/" className="hover:text-sindoor">View site ↗</Link>
-            <form action={signOut}><button className="hover:text-sindoor">Sign out</button></form>
-          </nav>
-        </div>
-      </header>
-      <main className="mx-auto max-w-3xl px-5 py-8">{children}</main>
+    <div className="admin min-h-svh bg-[#F6EFE2] lg:flex">
+      <AdminNav
+        title={member.weddingTitle}
+        signOutSlot={
+          <form action={signOut}>
+            <button className="flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-left text-sm text-[#D9BE86] transition-colors hover:bg-[rgba(243,217,155,.10)] hover:text-[#FFF7E8]">
+              Sign out <span className="truncate text-xs opacity-70">{member.email}</span>
+            </button>
+          </form>
+        }
+      />
+      <main className="min-w-0 flex-1 px-5 pb-12 pt-7 sm:px-8">
+        <div className="mx-auto max-w-[1080px]">{children}</div>
+        <form action={signOut} className="mt-10 text-center lg:hidden"><button className="text-sm text-quiet hover:text-sindoor">Sign out</button></form>
+      </main>
     </div>
   );
 }
