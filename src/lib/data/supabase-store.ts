@@ -1,6 +1,6 @@
 import "server-only";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import type { Ceremony, InviteView, RsvpSubmission } from "@/lib/types";
+import type { Ceremony, InviteView, PublicSite, RsvpSubmission } from "@/lib/types";
 import { isRsvpLocked, normalizeSubmission, RsvpError, SLUG_RE } from "@/lib/rsvp";
 import type { InviteStore } from "./store";
 
@@ -78,6 +78,33 @@ async function load(slug: string): Promise<InviteView | null> {
 
 export const supabaseStore: InviteStore = {
   getInvite: load,
+
+  /** One wedding per deployment: the first one. Published ceremonies only, no addresses or maps. */
+  async getPublicSite() {
+    const { data: w, error } = await db()
+      .from("weddings")
+      .select("id, groom_name, bride_name, title, main_date, main_date_bs, hashtag, rsvp_deadline, home")
+      .limit(1)
+      .maybeSingle();
+    if (error) throw error;
+    if (!w) return null;
+    const { data: es, error: e2 } = await db()
+      .from("events")
+      .select("id, name, subtitle, event_date, date_bs, starts_at, venue_city, image_path")
+      .eq("wedding_id", w.id)
+      .eq("is_published", true)
+      .order("sort_order")
+      .order("event_date");
+    if (e2) throw e2;
+    return {
+      wedding: { id: w.id, groomName: w.groom_name, brideName: w.bride_name, title: w.title, mainDate: w.main_date, mainDateBs: w.main_date_bs, hashtag: w.hashtag, rsvpDeadline: w.rsvp_deadline },
+      home: (w.home ?? {}) as PublicSite["home"],
+      ceremonies: (es ?? []).map((e) => ({
+        id: e.id, name: e.name, subtitle: e.subtitle, eventDate: e.event_date, dateBs: e.date_bs,
+        startsAt: e.starts_at ? String(e.starts_at).slice(0, 5) : null, venueCity: e.venue_city, imagePath: e.image_path,
+      })),
+    };
+  },
 
   async markOpened(slug) {
     if (!SLUG_RE.test(slug)) return;

@@ -1,5 +1,5 @@
 import "server-only";
-import type { InviteView, RsvpSubmission } from "@/lib/types";
+import type { PublicSite, InviteView, RsvpSubmission } from "@/lib/types";
 import { mockStore } from "./mock-store";
 import { supabaseStore } from "./supabase-store";
 
@@ -11,6 +11,7 @@ export interface InviteStore {
   getInvite(slug: string): Promise<InviteView | null>;
   markOpened(slug: string): Promise<void>;
   saveRsvp(slug: string, submission: RsvpSubmission): Promise<InviteView>;
+  getPublicSite(): Promise<PublicSite | null>;
 }
 
 export function usingSupabase(): boolean {

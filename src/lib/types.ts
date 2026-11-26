@@ -68,3 +68,15 @@ export interface RsvpSubmission {
   vegCount: number;
   blessing: string;
 }
+
+/** What the public home page may show: no addresses, map links or guest data. */
+export interface PublicCeremony {
+  id: string; name: string; subtitle: string | null; eventDate: string; dateBs: string;
+  startsAt: string | null; venueCity: string | null; imagePath: string | null;
+}
+export interface HomeContent {
+  welcome?: string; nickname?: string;
+  groomFrom?: string; groomTradition?: string; groomNote?: string;
+  brideFrom?: string; brideTradition?: string; brideNote?: string;
+}
+export interface PublicSite { wedding: Wedding; ceremonies: PublicCeremony[]; home: HomeContent }

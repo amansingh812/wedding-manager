@@ -32,3 +32,13 @@ select h, e from (values
   ('00000000-0000-4000-8000-000000000202', '00000000-0000-4000-8000-000000000106'),
   ('00000000-0000-4000-8000-000000000203', '00000000-0000-4000-8000-000000000106')
 ) as t(h, e);
+update weddings set home = jsonb_build_object(
+  'welcome', 'Two families, two traditions, one celebration. With the blessings of Lord Ganesh, we invite you to share in our joy.',
+  'groomFrom', 'Biratnagar',
+  'groomTradition', 'Maithil',
+  'groomNote', 'From Mithila: kohbar paintings, the matkor songs and the warmth of a Maithil home.',
+  'brideFrom', 'Gaighat',
+  'brideTradition', 'Pahadi',
+  'brideNote', 'From the hills: the red of sindoor and potey, panche baja and a Pahadi welcome.'
+) where id = '00000000-0000-4000-8000-000000000001';
+select title, home->>'groomFrom' as groom_from, home->>'brideFrom' as bride_from from weddings;

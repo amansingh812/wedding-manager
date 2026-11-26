@@ -44,7 +44,14 @@ function build(slug: string): InviteView | null {
   };
 }
 
+function toPublic(c: { id: string; name: string; subtitle: string | null; eventDate: string; dateBs: string; startsAt: string | null; venueCity: string | null; imagePath: string | null }) {
+  return { id: c.id, name: c.name, subtitle: c.subtitle, eventDate: c.eventDate, dateBs: c.dateBs, startsAt: c.startsAt, venueCity: c.venueCity, imagePath: c.imagePath };
+}
+
 export const mockStore: InviteStore = {
+  async getPublicSite() {
+    return { wedding: seedWedding, home: { welcome: "Two families, two traditions, one celebration.", groomFrom: "Biratnagar", groomTradition: "Maithil", brideFrom: "Gaighat", brideTradition: "Pahadi" }, ceremonies: seedCeremonies.filter((c) => c.isPublished).sort((a, b) => a.sortOrder - b.sortOrder).map(toPublic) };
+  },
   async getInvite(slug) {
     return build(slug);
   },
