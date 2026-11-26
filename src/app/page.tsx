@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import Countdown from "@/components/home/Countdown";
@@ -51,10 +50,6 @@ export default async function Home() {
   const venues = ["bibah", "reception"].map((k) => ceremonies.find((c) => c.kind === k)).filter((c): c is PublicCeremony => Boolean(c));
   const [mainVenue, ...otherVenues] = venues;
   const nav = [["#story", "Story"], ["#ceremonies", "Ceremonies"], ["#venue", "Venue"]];
-  // Signed-in family members carry a Supabase auth cookie; the admin itself re-checks properly.
-  const signedIn = (await cookies()).getAll().some((c) => c.name.startsWith("sb-") && c.name.includes("auth-token"));
-  const familyHref = signedIn ? "/admin" : "/admin/login";
-  const familyLabel = signedIn ? "Dashboard" : "Family login";
 
   return (
     <main id="top" className="bg-ivory font-sans text-ink">
@@ -79,10 +74,7 @@ export default async function Home() {
             {nav.map(([href, label]) => (
               <a key={href} href={href} className="hidden text-sm uppercase tracking-[1.5px] text-cream no-underline hover:text-gold-light sm:inline">{label}</a>
             ))}
-            <Link href={familyHref} className="inline-flex items-center gap-2 rounded-full border border-[rgba(243,217,155,.6)] px-4 py-2.5 text-[13px] uppercase tracking-[1.5px] text-gold-light no-underline transition hover:bg-white/15 sm:px-5 sm:py-3">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></svg>
-              {familyLabel}
-            </Link>
+            <Link href="/admin/login" className="text-[13px] uppercase tracking-[1.5px] text-cream no-underline hover:text-gold-light sm:text-sm">Login</Link>
           </div>
         </nav>
 
@@ -217,7 +209,7 @@ export default async function Home() {
           </div>
           <div className="flex flex-col items-end gap-2">
             <p className="text-[13px] uppercase tracking-[2.5px] text-gold-light">{[home.groomFrom && home.brideFrom ? `${home.groomFrom} → ${home.brideFrom}` : null, w.hashtag].filter(Boolean).join(" · ")}</p>
-            <Link href={familyHref} className="text-xs text-cream/80 underline-offset-4 hover:text-cream hover:underline">{familyLabel} →</Link>
+            <Link href="/admin/login" className="text-xs text-cream/80 underline-offset-4 hover:text-cream hover:underline">Family login →</Link>
           </div>
         </div>
       </footer>
