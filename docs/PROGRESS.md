@@ -117,3 +117,9 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Checklists: Haldi starter list added 7 items; own item assigned to Aman with past date showed under Overdue (1); tick saved (1/8); Done section folds. Test item removed, Haldi starters kept for the user.
 - Expenses: "paid > total" rejected with values kept; 1,50,000 / 50,000 parsed → रु 1,00,000 due under Bibah. Test expense deleted.
 - CSV: signed-out → 401. Signed-in download not clicked (would save a file to user's Downloads). 2 CSV unit tests (quoting, formula injection) — 21 total.
+
+## 2026-11-26 — Code review (Phase 4)
+- Fixed: /api/health was public and showed config, DB errors and part of server IP → now only {ok, db}.
+- Fixed: checklist owner must be a family member. Expense edit shows 1,50,000 not 150000.
+- Open for Phase 6: demo links visible on home (SHOW_DEMO_LINKS=1) + demo households in DB; checklist delete has no confirm (minor).
+- STATUS.md rewritten to current state.

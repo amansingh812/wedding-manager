@@ -18,7 +18,7 @@ Reference docs:
 | 0.3 | Seed data for local testing (wedding, 6 ceremonies, 3 demo households) | ✅ |
 | 0.4 | Data layer: mock store now, Supabase store in Phase 2 | ✅ |
 | 0.5 | CI: lint, typecheck, unit tests, build on every push | ✅ |
-| 0.6 | GitHub repo `amansingh812/wedding-manager` (private) | 🟡 waiting for repo |
+| 0.6 | GitHub repo `amansingh812/wedding-manager` (private) | ✅ |
 
 ## Phase 1 — Guest invitation (runs on mock data)
 | # | Stage | Status |
