@@ -57,9 +57,10 @@ export default async function AdminHome() {
       {/* Hero */}
       <section className="relative flex min-h-[230px] items-center overflow-hidden rounded-[26px] bg-[#FBF3E3]">
         <Image src="/images/dash-garland.jpg" alt="" fill priority sizes="(max-width: 1024px) 100vw, 1080px" className="object-cover object-top" />
-        <div className="relative flex w-full flex-wrap items-end justify-between gap-6 px-6 pb-8 pt-16 sm:px-10">
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,243,227,0)_25%,rgba(251,243,227,.85)_70%)]" />
+        <div className="relative flex w-full flex-wrap items-end justify-between gap-6 px-6 pb-8 pt-28 sm:px-10">
           <div className="flex flex-col gap-1.5">
-            <span className="text-sm text-[#6B4E2E]">Namaste, {member.name.split(" ")[0]}</span>
+            <span className="text-sm font-semibold text-[#6B4E2E]">Namaste, {member.name.split(" ")[0]}</span>
             <h1 className="font-display text-5xl font-semibold leading-none text-maroon sm:text-[56px]">{days} {days === 1 ? "day" : "days"} to go</h1>
             {next && <span className="text-sm text-[#6B4E2E]">{next.name} on {formatAd(next.event_date)} · {next.date_bs}{next.starts_at ? ` · ${formatTime(String(next.starts_at).slice(0, 5))}` : ""}</span>}
             {w && <span className="text-sm text-[#6B4E2E]">Main day {w.main_date_bs}</span>}

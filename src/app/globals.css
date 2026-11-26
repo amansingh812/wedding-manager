@@ -76,7 +76,7 @@ body {
 .admin .divide-sand\/70 > :not(:last-child), .admin .divide-sand\/60 > :not(:last-child) { border-color: #F0E4CC; }
 .admin .rounded-2xl { border-radius: 20px; }
 /* headings */
-.admin main h1.font-display { font-weight: 600; color: #3A0A0C; }
+.admin main h1.font-display { font-weight: 600; }
 /* text fields: soft cream, gold focus ring */
 .admin input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
 .admin textarea,
