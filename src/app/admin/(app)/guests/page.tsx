@@ -17,7 +17,8 @@ type Row = {
   max_guests: number; sent_at: string | null; open_count: number; invitations: { count: number }[];
 };
 const status = (h: Row) => (h.open_count > 0 ? "Opened" : h.sent_at ? "Sent" : "Not sent");
-const maskPhone = (p: string | null) => (p ? p.replace(/^(\+\d{3,5})(\d{2})\d+(\d{3})$/, "$1 $2•• ••• $3") : "No phone");
+/** "+9779812345678" → "+977 98•• ••• 678" (country code first: Nepal, India, else 1–3 digits). */
+const maskPhone = (p: string | null) => (p ? p.replace(/^(\+977|\+91|\+\d{1,3}?)(\d{2})\d+(\d{3})$/, "$1 $2•• ••• $3") : "No phone");
 
 export default async function GuestsPage({ searchParams }: { searchParams: Promise<{ q?: string; f?: string; saved?: string; deleted?: string }> }) {
   const { member } = await getMembership();
