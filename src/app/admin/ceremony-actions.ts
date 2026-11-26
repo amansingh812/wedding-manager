@@ -46,15 +46,18 @@ export async function saveCeremony(id: string | null, _: FormState, form: FormDa
     ),
   );
   const parsed = ceremonySchema.safeParse(raw);
-  if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? "Please check the form." };
+  // send typed values back so the form keeps them after an error
+  const values = Object.fromEntries(Object.entries(raw).map(([k, v]) => [k, String(v)]));
+  const fail = (error: string): FormState => ({ error, values, n: Date.now() });
+  if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Please check the form.");
 
   const sb = await createAuthClient();
   if (id) {
     const { error } = await sb.from("events").update(parsed.data).eq("id", id).eq("wedding_id", member.weddingId);
-    if (error) return { error: "Couldn't save. Please try again." };
+    if (error) return fail("Couldn't save. Please try again.");
   } else {
     const { error } = await sb.from("events").insert({ ...parsed.data, wedding_id: member.weddingId });
-    if (error) return { error: "Couldn't save. Please try again." };
+    if (error) return fail("Couldn't save. Please try again.");
   }
   revalidatePath("/admin/ceremonies");
   redirect("/admin/ceremonies?saved=1");

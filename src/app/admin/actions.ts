@@ -8,7 +8,7 @@ import { authConfigured, createAuthClient, getMembership } from "@/lib/supabase/
 import { allow, clientIp } from "@/lib/ratelimit";
 import { createClient } from "@supabase/supabase-js";
 
-export type FormState = { ok?: boolean; error?: string; message?: string };
+export type FormState = { ok?: boolean; error?: string; message?: string; values?: Record<string, string>; n?: number };
 
 const emailSchema = z.string().trim().toLowerCase().email().max(200);
 

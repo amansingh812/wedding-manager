@@ -21,7 +21,7 @@ export default async function MembersPage() {
       <h1 className="font-display text-4xl text-maroon">Family</h1>
       <p className="mt-1 text-quiet">People who can sign in. Admins can edit ceremonies and add family.</p>
 
-      {isAdmin && <div className="mt-6"><InviteMemberForm /></div>}
+      {isAdmin && <div className="mt-6"><InviteMemberForm listKey={[...(members ?? []).map((m) => m.user_id), ...(invites ?? []).map((i) => i.email)].join(",")} /></div>}
 
       <ul className="mt-6 divide-y divide-sand/70 rounded-2xl border border-sand bg-white">
         {members?.map((m) => (
