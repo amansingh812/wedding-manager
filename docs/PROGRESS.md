@@ -112,3 +112,8 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 ## 2026-11-26 — Admin home + Send page redesign
 - Dashboard with Higgsfield images (kohbar hero, hands/diyas/tilak/mehendi tiles). Family count only — no per-ceremony headcount (user decision).
 - Send: diyas header, WhatsApp-style preview with the OG link card. "Opened" now counts as sent on both pages.
+
+## 2026-11-26 — Phase 4.2–4.4 (live-tested) — Phase 4 complete
+- Checklists: Haldi starter list added 7 items; own item assigned to Aman with past date showed under Overdue (1); tick saved (1/8); Done section folds. Test item removed, Haldi starters kept for the user.
+- Expenses: "paid > total" rejected with values kept; 1,50,000 / 50,000 parsed → रु 1,00,000 due under Bibah. Test expense deleted.
+- CSV: signed-out → 401. Signed-in download not clicked (would save a file to user's Downloads). 2 CSV unit tests (quoting, formula injection) — 21 total.

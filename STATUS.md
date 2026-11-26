@@ -1,6 +1,6 @@
 # Project Status — Wedding Manager
 
-_Last updated: 26 Nov 2026 (Phase 3 done: family login, ceremonies, guests, invite grid, WhatsApp send. Next: Phase 4 dashboard)_
+_Last updated: 26 Nov 2026 (Phase 4 done: dashboard, checklists, expenses, CSV. Next: Phase 5 public home page)_
 
 One page to see what's done, what's pending and what's waiting on someone.
 Details per stage: [`docs/ROADMAP.md`](docs/ROADMAP.md) · session notes: [`docs/PROGRESS.md`](docs/PROGRESS.md)

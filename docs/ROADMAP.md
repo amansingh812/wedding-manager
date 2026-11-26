@@ -56,9 +56,9 @@ Reference docs:
 | # | Stage | Status |
 |---|---|---|
 | 4.1 | Dashboard: countdown hero, family count (by side, people), invitations sent/opened, next ceremony, image shortcuts. Per-ceremony headcount dropped (user) | ✅ |
-| 4.2 | Ceremony checklists + starter templates + My items / Overdue | ⬜ |
-| 4.3 | Expense ledger | ⬜ |
-| 4.4 | CSV exports (plate counts, guests, expenses) | ⬜ |
+| 4.2 | Ceremony checklists: starter lists per ceremony (in code), add/assign/due, tick done, My items / Overdue, progress chips | ✅ |
+| 4.3 | Expense ledger: total / paid / still to pay (रु, Nepali grouping), by ceremony; admin edits, family views | ✅ |
+| 4.4 | CSV downloads: guest list (with ceremonies + invite links), checklists, expenses. Plate counts dropped with headcount | ✅ |
 
 ## Phase 5 — Public home page
 | # | Stage | Status |
