@@ -18,6 +18,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: `${w.title} · Wedding`, description: desc, openGraph: { title: w.title, description: desc, images: [{ url: "/images/og.jpg", width: 1200, height: 630 }] } };
 }
 
+/** "Venue, City" — without repeating the city if the venue name already has it. */
+const place = (c: PublicCeremony) =>
+  c.venueName && c.venueCity && c.venueName.includes(c.venueCity) ? c.venueName : [c.venueName, c.venueCity].filter(Boolean).join(", ");
 const shortAd = (iso: string) => formatAd(iso).replace(/^\w+, /, ""); // "Sat, 27 Feb" → "27 Feb"
 const PETALS = [
   { left: "12%", size: 22, dur: 14, delay: -2 },
@@ -160,9 +163,9 @@ export default async function Home() {
           <div className="relative mx-auto box-border w-full max-w-[1280px] px-6 pb-14 sm:px-8">
             <div className="flex max-w-[440px] flex-col gap-3 rounded-3xl bg-[rgba(251,246,236,.95)] p-8">
               <span className="text-xs uppercase tracking-[2.5px] text-[#8A6A3B]">{mainVenue.name} · {mainVenue.dateBs} · {shortAd(mainVenue.eventDate)}</span>
-              <h2 className="font-display text-[34px] font-medium leading-tight text-maroon sm:text-[40px]">{[mainVenue.venueName, mainVenue.venueCity].filter(Boolean).join(", ")}</h2>
+              <h2 className="font-display text-[34px] font-medium leading-tight text-maroon sm:text-[40px]">{place(mainVenue)}</h2>
               {otherVenues.map((v) => (
-                <p key={v.id} className="text-[15px] text-[#5A4636]">{v.name} · {v.dateBs} · {[v.venueName, v.venueCity].filter(Boolean).join(", ")}</p>
+                <p key={v.id} className="text-[15px] text-[#5A4636]">{v.name} · {v.dateBs} · {place(v)}</p>
               ))}
               {venues.filter((v) => v.mapUrl).map((v) => (
                 <a key={v.id} href={v.mapUrl!} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-2.5 self-start rounded-full bg-gold px-5 py-3.5 text-[15px] font-semibold text-[#2A0709] no-underline hover:bg-gold-hover">

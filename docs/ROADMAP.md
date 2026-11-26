@@ -63,7 +63,7 @@ Reference docs:
 ## Phase 5 — Public home page
 | # | Stage | Status |
 |---|---|---|
-| 5.1 | Public home: Shree Ganesh hero + live countdown, welcome, two traditions (Maithil/Pahadi), celebrations (names, dates, time, city — no addresses/maps), Mithila blessing, footer. Text in `weddings.home` (migration 0006) | ✅ |
+| 5.1 | Public home rebuilt 26 Nov to match the Claude Design canvas (video hero, story, families, ceremonies, venue, personal invite, Terai footer). Earlier version: Shree Ganesh hero + live countdown, welcome, two traditions (Maithil/Pahadi), celebrations (names, dates, time, city — no addresses/maps), Mithila blessing, footer. Text in `weddings.home` (migration 0006) | ✅ |
 
 ## Phase 6 — Launch hardening
 | # | Stage | Status |

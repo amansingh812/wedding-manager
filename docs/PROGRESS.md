@@ -129,3 +129,9 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Home text lives in weddings.home (0006, applied) so code stays generic. Not yet editable in admin.
 - Fixed in review: blurry hero on desktop (566px image) → sharp centre + blurred sides; letter-spacing broke Devanagari.
 - Phone-width screenshot not taken (Chrome window would not resize); layout is mobile-first.
+
+## 2026-11-26 — Home page = Claude Design canvas; real names & venues
+- Rebuilt / to match the "Home · Public wedding site" artboard. Assets copied from the canvas (hero video + poster, chiya, paag, garden, diyas steps, Terai, Mithila border), resized.
+- Data: bride Ashika (Rayamajhi), title "Nirajan & Ashika", hashtag #NirajanWedsAshika, nickname Ashiran, families Singh / Rayamajhi.
+- Venues: Tilak & Matkor — groom's village, Sitapur, Mirchaiya, Siraha · Haldi & Mehendi — both family homes · Janti/Bibah — hotel in Gaighat (TBC) · Reception — City Palace – Hotel & Resort, Biratnagar.
+- Public page shows venue names only for Bibah + Reception; home ceremonies show city only.
