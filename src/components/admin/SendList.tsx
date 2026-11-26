@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useActionState, useState } from "react";
 import { markSent, saveInviteMessage } from "@/app/admin/invite-actions";
@@ -44,7 +45,20 @@ export default function SendList({ rows, template, siteUrl, isAdmin }: { rows: S
         <textarea id="msg" name="message" rows={3} maxLength={1000} value={message} onChange={(e) => setMessage(e.target.value)} disabled={!isAdmin}
           className="w-full rounded-xl border border-sand px-3.5 py-2.5 text-[16px] outline-none focus:border-gold disabled:bg-cream/50" />
         <p className="text-xs text-quiet">{"{name}"} becomes the household name, {"{link}"} their personal invite link.</p>
-        <p className="whitespace-pre-line rounded-xl bg-cream px-3.5 py-2.5 text-sm text-ink">{preview}</p>
+        <div className="rounded-2xl bg-[#efe7dc] bg-[url('/images/mandala.webp')] bg-[length:160px] bg-blend-soft-light p-4">
+          <p className="mb-2 text-center text-[11px] font-semibold uppercase tracking-wider text-muted">How guests see it on WhatsApp</p>
+          <div className="ml-auto max-w-[320px] overflow-hidden rounded-xl rounded-tr-sm bg-[#d9fdd3] shadow-sm">
+            <div className="m-1 overflow-hidden rounded-lg bg-white/70">
+              <div className="relative aspect-[1200/630]"><Image src="/images/og.jpg" alt="" fill sizes="320px" className="object-cover" /></div>
+              <div className="px-2.5 py-1.5">
+                <p className="text-[13px] font-semibold text-ink">Special invitation for {rows[0]?.name ?? "your family"}</p>
+                <p className="truncate text-[11px] text-quiet">{siteUrl.replace(/^https?:\/\//, "")}</p>
+              </div>
+            </div>
+            <p className="whitespace-pre-line break-words px-2.5 pb-1 pt-0.5 text-[14px] leading-snug text-ink">{preview}</p>
+            <p className="px-2.5 pb-1.5 text-right text-[10px] text-quiet">✓✓</p>
+          </div>
+        </div>
         {isAdmin && (
           <div className="flex items-center gap-3">
             <button disabled={pending} className="rounded-full border border-sand px-4 py-1.5 text-sm font-semibold text-ink">{pending ? "Saving…" : "Save message"}</button>
