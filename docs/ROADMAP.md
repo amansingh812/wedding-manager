@@ -46,8 +46,8 @@ Reference docs:
 ## Phase 3 — Family admin: guests & ceremonies
 | # | Stage | Status |
 |---|---|---|
-| 3.1 | Magic-link login, members & roles (invite-only family list) | 🟡 needs publishable key var |
-| 3.2 | Ceremony editor (draft / published, "missing venue/time/map" hints; family read-only) | 🟡 built, live test after login works |
+| 3.1 | Magic-link login, members & roles (invite-only family list) | ✅ |
+| 3.2 | Ceremony editor (draft / published, "missing venue/time/map" hints; family read-only) | ✅ |
 | 3.3 | Household list, add/edit, paste from Excel | ⬜ |
 | 3.4 | Ceremony matrix (tick boxes) + group shortcuts | ⬜ |
 | 3.5 | WhatsApp Send / Resend + invite status | ⬜ |

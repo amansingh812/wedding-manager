@@ -85,3 +85,10 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 ## 2026-11-25 — Phase 3.2 ceremony editor
 - /admin/ceremonies list (Published/Draft, missing-field hints) and /admin/ceremonies/[id] form (validated: times, https map link, hex colours). Admin-only writes, also enforced by RLS.
 - Live test blocked on SUPABASE_PUBLISHABLE_KEY (login).
+
+## 2026-11-26 — Live test: login, family, ceremonies (all pass)
+- Magic link to amanpd0@gmail.com → admin home "Namaste, Aman / Admin". Stranger email → same reply, no link.
+- Family: added Test Cousin (email lowercased, "hasn't signed in yet"), removed. Fixed: success note lingered after removal.
+- Ceremonies: http map link rejected with message; Reception 18:00→18:30 showed on /invite/office-… immediately; restored to 18:00.
+- Fixed: form lost all typed values after a validation error (React resets forms) — now refills.
+- Not tested: sign out (would end the user's session); family-role read-only view (needs a 2nd account).
