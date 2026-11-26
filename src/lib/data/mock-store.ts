@@ -44,8 +44,8 @@ function build(slug: string): InviteView | null {
   };
 }
 
-function toPublic(c: { id: string; name: string; subtitle: string | null; eventDate: string; dateBs: string; startsAt: string | null; venueCity: string | null; imagePath: string | null }) {
-  return { id: c.id, name: c.name, subtitle: c.subtitle, eventDate: c.eventDate, dateBs: c.dateBs, startsAt: c.startsAt, venueCity: c.venueCity, imagePath: c.imagePath };
+function toPublic(c: { id: string; kind: string | null; name: string; subtitle: string | null; eventDate: string; dateBs: string; startsAt: string | null; venueName: string | null; venueCity: string | null; imagePath: string | null }) {
+  return { id: c.id, name: c.name, subtitle: c.subtitle, eventDate: c.eventDate, dateBs: c.dateBs, startsAt: c.startsAt, venueCity: c.venueCity, imagePath: c.imagePath, kind: c.kind, venueName: c.kind === "bibah" || c.kind === "reception" ? c.venueName : null, mapUrl: null };
 }
 
 export const mockStore: InviteStore = {

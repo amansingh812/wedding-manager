@@ -8,11 +8,11 @@ import type { Ceremony, Side, Wedding } from "@/lib/types";
 export const seedWedding: Wedding = {
   id: "w-nirajan-deepa",
   groomName: "Nirajan",
-  brideName: "Deepa",
-  title: "Nirajan & Deepa",
+  brideName: "Ashika",
+  title: "Nirajan & Ashika",
   mainDate: "2027-02-28",
   mainDateBs: "Fagun 16, 2083",
-  hashtag: "#NirajanWedsDeepa",
+  hashtag: "#NirajanWedsAshika",
   rsvpDeadline: "2027-02-20",
 };
 

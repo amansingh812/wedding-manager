@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-/** Live countdown to the main day (midnight Nepal time). Server renders days only, client fills the rest. */
+/** Live countdown to the main day (midnight Nepal time), styled like the design's glass boxes. */
 export default function Countdown({ dateIso, initialDays }: { dateIso: string; initialDays: number }) {
   const [left, setLeft] = useState<{ d: number; h: number; m: number; s: number } | null>(null);
   useEffect(() => {
@@ -16,19 +16,19 @@ export default function Countdown({ dateIso, initialDays }: { dateIso: string; i
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
   }, [dateIso]);
-
+  const pad = (n?: number) => (n === undefined ? "–" : String(n).padStart(2, "0"));
   const cells = [
-    { n: left?.d ?? initialDays, l: "days" },
-    { n: left?.h, l: "hours" },
-    { n: left?.m, l: "minutes" },
-    { n: left?.s, l: "seconds" },
+    { v: String(left?.d ?? initialDays), l: "Days" },
+    { v: pad(left?.h), l: "Hours" },
+    { v: pad(left?.m), l: "Mins" },
+    { v: pad(left?.s), l: "Secs" },
   ];
   return (
-    <div role="timer" aria-label={`${left?.d ?? initialDays} days to go`} className="flex justify-center gap-2 sm:gap-3">
+    <div role="timer" aria-label={`${left?.d ?? initialDays} days to go`} className="flex flex-wrap gap-3">
       {cells.map((c) => (
-        <div key={c.l} className="w-[72px] rounded-2xl border border-gold/40 bg-night/45 py-2.5 text-center backdrop-blur sm:w-20">
-          <p className="font-display text-3xl tabular-nums leading-none text-gold-light sm:text-4xl">{c.n === undefined ? "–" : String(c.n).padStart(c.l === "days" ? 1 : 2, "0")}</p>
-          <p className="mt-1 text-[10px] uppercase tracking-[.2em] text-ivory/70">{c.l}</p>
+        <div key={c.l} className="flex w-[76px] flex-col items-center gap-1 rounded-2xl border border-[rgba(243,217,155,.35)] bg-[rgba(255,247,232,.1)] pb-3 pt-4 backdrop-blur-sm sm:w-[92px]">
+          <span className="font-display text-[34px] leading-none tabular-nums text-[#FFF7E8] sm:text-[40px]">{c.v}</span>
+          <span className="text-[11px] uppercase tracking-[2px] text-gold-light">{c.l}</span>
         </div>
       ))}
     </div>

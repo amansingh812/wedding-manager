@@ -42,3 +42,25 @@ update weddings set home = jsonb_build_object(
   'brideNote', 'From the hills: the red of sindoor and potey, panche baja and a Pahadi welcome.'
 ) where id = '00000000-0000-4000-8000-000000000001';
 select title, home->>'groomFrom' as groom_from, home->>'brideFrom' as bride_from from weddings;
+-- 26 Nov 2026: bride's name, nickname, family names, real venues
+update weddings set
+  bride_name = 'Ashika',
+  title = 'Nirajan & Ashika',
+  hashtag = '#NirajanWedsAshika',
+  invite_message = replace(invite_message, 'Deepa', 'Ashika'),
+  home = home || jsonb_build_object(
+    'nickname', 'Ashiran',
+    'groomFamily', 'Singh Family',
+    'brideFamily', 'Rayamajhi Family',
+    'brideFullName', 'Ashika Rayamajhi',
+    'blessing', 'With the blessings of our elders, two families come together.'
+  )
+where id = '00000000-0000-4000-8000-000000000001';
+
+update events set venue_name = 'Groom''s village', venue_city = 'Sitapur, Mirchaiya, Siraha', address = 'Sitapur, Mirchaiya, Siraha, Nepal' where id = '00000000-0000-4000-8000-000000000101';
+update events set venue_name = 'At both family homes', venue_city = 'Biratnagar & Gaighat', address = null where id in ('00000000-0000-4000-8000-000000000102','00000000-0000-4000-8000-000000000103');
+update events set venue_name = 'Groom''s home → hotel in Gaighat (to be confirmed)', venue_city = 'Biratnagar → Gaighat' where id = '00000000-0000-4000-8000-000000000104';
+update events set venue_name = 'Hotel in Gaighat (to be confirmed)', venue_city = 'Gaighat', address = null where id = '00000000-0000-4000-8000-000000000105';
+update events set venue_name = 'City Palace – Hotel & Resort', venue_city = 'Biratnagar', address = 'Biratnagar, Morang' where id = '00000000-0000-4000-8000-000000000106';
+
+select name, venue_name, venue_city from events order by sort_order;

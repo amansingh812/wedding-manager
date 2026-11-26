@@ -73,9 +73,13 @@ export interface RsvpSubmission {
 export interface PublicCeremony {
   id: string; name: string; subtitle: string | null; eventDate: string; dateBs: string;
   startsAt: string | null; venueCity: string | null; imagePath: string | null;
+  kind: string | null;
+  /** Only filled for the public venues (wedding + reception); home ceremonies stay private. */
+  venueName: string | null; mapUrl: string | null;
 }
 export interface HomeContent {
-  welcome?: string; nickname?: string;
+  welcome?: string; nickname?: string; blessing?: string;
+  groomFamily?: string; brideFamily?: string; brideFullName?: string;
   groomFrom?: string; groomTradition?: string; groomNote?: string;
   brideFrom?: string; brideTradition?: string; brideNote?: string;
 }

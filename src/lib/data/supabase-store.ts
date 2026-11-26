@@ -76,6 +76,9 @@ async function load(slug: string): Promise<InviteView | null> {
   };
 }
 
+/** Ceremonies held at public venues; others (family homes) never show their venue publicly. */
+const PUBLIC_VENUE_KINDS = new Set(["bibah", "reception"]);
+
 export const supabaseStore: InviteStore = {
   getInvite: load,
 
@@ -90,7 +93,7 @@ export const supabaseStore: InviteStore = {
     if (!w) return null;
     const { data: es, error: e2 } = await db()
       .from("events")
-      .select("id, name, subtitle, event_date, date_bs, starts_at, venue_city, image_path")
+      .select("id, kind, name, subtitle, event_date, date_bs, starts_at, venue_name, venue_city, map_url, image_path")
       .eq("wedding_id", w.id)
       .eq("is_published", true)
       .order("sort_order")
@@ -102,6 +105,9 @@ export const supabaseStore: InviteStore = {
       ceremonies: (es ?? []).map((e) => ({
         id: e.id, name: e.name, subtitle: e.subtitle, eventDate: e.event_date, dateBs: e.date_bs,
         startsAt: e.starts_at ? String(e.starts_at).slice(0, 5) : null, venueCity: e.venue_city, imagePath: e.image_path,
+        kind: e.kind,
+        venueName: PUBLIC_VENUE_KINDS.has(e.kind) ? e.venue_name : null,
+        mapUrl: PUBLIC_VENUE_KINDS.has(e.kind) ? e.map_url : null,
       })),
     };
   },
