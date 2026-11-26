@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useState, useTransition } from "react";
+import { useActionState, useEffect, useState, useTransition } from "react";
 import { bulkInvite, setInvite } from "@/app/admin/invite-actions";
 import type { FormState } from "@/app/admin/actions";
 
@@ -14,6 +14,9 @@ export default function Matrix({ households, events, invited }: { households: H[
   const [failed, setFailed] = useState<string | null>(null);
   const [, start] = useTransition();
   const [state, action, pending] = useActionState<FormState, FormData>(bulkInvite, {});
+  // after a shortcut the server sends fresh ticks; take them without losing the note
+  const invitedKey = invited.join("|");
+  useEffect(() => { setCells(new Set(invited)); }, [invitedKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function toggle(h: string, e: string) {
     const key = `${h}:${e}`;

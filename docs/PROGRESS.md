@@ -98,3 +98,8 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Edit: bad phone rejected, typed values + ticks kept. New invite link rendered its ceremonies. Two-step remove; removed link → 404. Test rows cleaned up.
 - 7 new unit tests (phone, side, slug, paste parsing) — 17 total.
 - Not covered by 3.3: the all-households × ceremonies grid (3.4).
+
+## 2026-11-26 — Phase 3.4 + 3.5 (live-tested) — Phase 3 complete
+- Grid: ticked Office→Mehendi, survived reload; shortcut "Remove both/friends from Mehendi" undid it and grid refreshed. Fixed: shortcut note vanished on refresh.
+- Send: message preview fills {link}; "Copy message" (no phone) marked Office sent, filter moved it. WhatsApp button builds wa.me (unit-tested); not clicked live, to avoid messaging a real number.
+- Demo data note: Office – Tech Team now shows "sent".

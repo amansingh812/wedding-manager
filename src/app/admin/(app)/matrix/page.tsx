@@ -19,7 +19,7 @@ export default async function MatrixPage() {
       <h1 className="font-display text-4xl text-maroon">Who&apos;s invited where</h1>
       <p className="mb-6 mt-1 text-quiet">Tick a box to invite a household to a ceremony. Saves instantly; guests see it on their invitation.</p>
       {households.length ? (
-        <Matrix key={invited.join("|")} households={households} events={(es ?? []).map((e) => ({ id: e.id as string, name: e.name as string }))} invited={invited} />
+        <Matrix households={households} events={(es ?? []).map((e) => ({ id: e.id as string, name: e.name as string }))} invited={invited} />
       ) : (
         <p className="text-quiet">Add guests first.</p>
       )}

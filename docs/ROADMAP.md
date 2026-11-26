@@ -49,8 +49,8 @@ Reference docs:
 | 3.1 | Magic-link login, members & roles (invite-only family list) | ✅ |
 | 3.2 | Ceremony editor (draft / published, "missing venue/time/map" hints; family read-only) | ✅ |
 | 3.3 | Household list (search, side filter, status), add/edit with per-household ceremony ticks, paste from Excel with preview | ✅ |
-| 3.4 | Ceremony matrix (tick boxes) + group shortcuts | ⬜ |
-| 3.5 | WhatsApp Send / Resend + invite status | ⬜ |
+| 3.4 | Ceremony grid (tick boxes, instant save, per-ceremony counts) + side shortcuts | ✅ |
+| 3.5 | WhatsApp Send / Resend (wa.me with message ready), Copy message when no phone, editable message with {name}/{link}, sent/opened status | ✅ |
 
 ## Phase 4 — Dashboard, checklists, ledger
 | # | Stage | Status |
