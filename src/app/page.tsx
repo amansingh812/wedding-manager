@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import Countdown from "@/components/home/Countdown";
@@ -50,6 +51,10 @@ export default async function Home() {
   const venues = ["bibah", "reception"].map((k) => ceremonies.find((c) => c.kind === k)).filter((c): c is PublicCeremony => Boolean(c));
   const [mainVenue, ...otherVenues] = venues;
   const nav = [["#story", "Story"], ["#ceremonies", "Ceremonies"], ["#venue", "Venue"]];
+  // Signed-in family members carry a Supabase auth cookie; the admin itself re-checks properly.
+  const signedIn = (await cookies()).getAll().some((c) => c.name.startsWith("sb-") && c.name.includes("auth-token"));
+  const familyHref = signedIn ? "/admin" : "/admin/login";
+  const familyLabel = signedIn ? "Dashboard" : "Family login";
 
   return (
     <main id="top" className="bg-ivory font-sans text-ink">
@@ -72,8 +77,12 @@ export default async function Home() {
           </a>
           <div className="flex flex-wrap items-center gap-5 sm:gap-7">
             {nav.map(([href, label]) => (
-              <a key={href} href={href} className="text-[13px] uppercase tracking-[1.5px] text-cream no-underline hover:text-gold-light sm:text-sm">{label}</a>
+              <a key={href} href={href} className="hidden text-sm uppercase tracking-[1.5px] text-cream no-underline hover:text-gold-light sm:inline">{label}</a>
             ))}
+            <Link href={familyHref} className="inline-flex items-center gap-2 rounded-full border border-[rgba(243,217,155,.6)] px-4 py-2.5 text-[13px] uppercase tracking-[1.5px] text-gold-light no-underline transition hover:bg-white/15 sm:px-5 sm:py-3">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></svg>
+              {familyLabel}
+            </Link>
           </div>
         </nav>
 
@@ -179,21 +188,23 @@ export default async function Home() {
       )}
 
       {/* 7 · Personal invitation */}
-      <section className="grid bg-ivory sm:grid-cols-2">
-        <div className="relative min-h-[360px] sm:min-h-[520px]">
-          <Image src="/images/diyas-steps.jpg" alt="Lit diyas on temple steps" fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" />
+      <section className="mx-auto grid max-w-[1280px] items-center gap-10 px-6 py-24 sm:grid-cols-[1fr_1.1fr] sm:gap-16 sm:px-8">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-[220px_220px_24px_24px] shadow-xl sm:max-h-[560px]">
+          <Image src="/images/diyas-steps.jpg" alt="Lit diyas on temple steps" fill sizes="(max-width: 640px) 100vw, 560px" className="object-cover object-[center_70%]" />
         </div>
-        <div className="flex max-w-[520px] flex-col justify-center gap-5 px-8 py-16 sm:px-12 sm:py-20">
-          <h2 className="font-display text-[44px] font-medium leading-[1.05] text-maroon sm:text-[52px]">Your invitation is personal.</h2>
-          <p className="text-[17px] leading-relaxed text-[#5A4636]">Open the link we sent you on WhatsApp to see your ceremonies, venues and timings for your family.</p>
+        <div className="flex flex-col gap-5">
+          <p className="text-xs uppercase tracking-[3px] text-[#8A6A3B]">For our guests</p>
+          <h2 className="font-display text-[40px] font-medium leading-[1.08] text-maroon sm:text-[48px]">Your invitation is personal.</h2>
+          <p className="max-w-md text-[17px] leading-relaxed text-[#5A4636]">Open the link we sent you on WhatsApp to see your ceremonies, venues and timings for your family.</p>
           {showDemo && (
-            <nav aria-label="Demo invitations" className="flex flex-col gap-1.5 rounded-2xl border border-dashed border-sand p-4 text-sm">
-              <span className="text-xs font-semibold uppercase tracking-[2px] text-quiet">Demo invitations (test only)</span>
+            <nav aria-label="Demo invitations" className="mt-2 flex max-w-sm flex-col gap-1.5 rounded-2xl border border-dashed border-sand bg-white/60 p-4 text-sm">
+              <span className="text-[11px] font-semibold uppercase tracking-[2px] text-quiet">Demo invitations (test only)</span>
               {seedHouseholds.map((h) => <Link key={h.slug} href={`/invite/${h.slug}`} className="text-sindoor hover:underline">{h.displayName}</Link>)}
             </nav>
           )}
         </div>
       </section>
+      <div aria-hidden className="h-16 bg-[url('/images/mithila-border.jpg')] bg-[length:auto_100%] bg-center bg-repeat-x" />
 
       {/* 8 · Footer */}
       <footer className="relative flex h-[420px] items-end overflow-hidden">
@@ -206,7 +217,7 @@ export default async function Home() {
           </div>
           <div className="flex flex-col items-end gap-2">
             <p className="text-[13px] uppercase tracking-[2.5px] text-gold-light">{[home.groomFrom && home.brideFrom ? `${home.groomFrom} → ${home.brideFrom}` : null, w.hashtag].filter(Boolean).join(" · ")}</p>
-            <Link href="/admin/login" className="text-xs text-cream/70 hover:text-cream">Family sign in</Link>
+            <Link href={familyHref} className="text-xs text-cream/80 underline-offset-4 hover:text-cream hover:underline">{familyLabel} →</Link>
           </div>
         </div>
       </footer>

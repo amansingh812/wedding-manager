@@ -37,6 +37,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             <Link href="/admin/checklists" className="hover:text-sindoor">Checklists</Link>
             <Link href="/admin/expenses" className="hover:text-sindoor">Expenses</Link>
             <Link href="/admin/members" className="hover:text-sindoor">Family</Link>
+            <Link href="/" className="hover:text-sindoor">View site ↗</Link>
             <form action={signOut}><button className="hover:text-sindoor">Sign out</button></form>
           </nav>
         </div>
