@@ -30,6 +30,10 @@ export async function addItem(_: FormState, form: FormData): Promise<FormState> 
     const { data } = await sb.from("events").select("id").eq("id", parsed.data.event_id).eq("wedding_id", member.weddingId).maybeSingle();
     if (!data) return { error: "Unknown ceremony." };
   }
+  if (parsed.data.owner_id) {
+    const { data } = await sb.from("members").select("user_id").eq("wedding_id", member.weddingId).eq("user_id", parsed.data.owner_id).maybeSingle();
+    if (!data) return { error: "Pick someone from the family list.", values: raw, n: Date.now() };
+  }
   const { error } = await sb.from("checklist_items").insert({ ...parsed.data, wedding_id: member.weddingId });
   if (error) return { error: "Couldn't add. Please try again.", values: raw, n: Date.now() };
   revalidatePath("/admin/checklists");

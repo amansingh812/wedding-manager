@@ -30,8 +30,8 @@ export default function ExpenseForm({ expense, events, readOnly }: { expense: Ex
                 <option value="">General / whole wedding</option>{events.map((e) => <option key={e.id} value={e.id}>{e.name}</option>)}
               </select>
             </F>
-            <F label="Total (रु)"><input name="total_amount" inputMode="decimal" required placeholder="1,50,000" defaultValue={d("total_amount", x?.total)} className={input} /></F>
-            <F label="Paid so far (रु)"><input name="paid_amount" inputMode="decimal" placeholder="50,000" defaultValue={d("paid_amount", x?.paid ?? 0)} className={input} /></F>
+            <F label="Total (रु)"><input name="total_amount" inputMode="decimal" required placeholder="1,50,000" defaultValue={d("total_amount", x ? x.total.toLocaleString("en-IN") : null)} className={input} /></F>
+            <F label="Paid so far (रु)"><input name="paid_amount" inputMode="decimal" placeholder="50,000" defaultValue={d("paid_amount", x ? x.paid.toLocaleString("en-IN") : 0)} className={input} /></F>
             <F label="Vendor"><input name="vendor_name" maxLength={80} defaultValue={d("vendor_name", x?.vendorName)} className={input} /></F>
             <F label="Vendor phone"><input name="vendor_phone" type="tel" maxLength={30} defaultValue={d("vendor_phone", x?.vendorPhone)} className={input} /></F>
           </div>

@@ -24,14 +24,3 @@ export async function allow(name: LimitName, key: string): Promise<boolean> {
   }
 }
 
-/** For /api/health: is the binding reachable, and what IP does the worker see? */
-export async function limiterStatus(h: Headers): Promise<string> {
-  try {
-    const env = getCloudflareContext().env as unknown as Record<string, Limiter | undefined>;
-    if (!env.INVITE_LIMITER) return "no binding";
-    const ip = clientIp(h);
-    return `bound; ip=${ip.replace(/[\d]+$/, "x")}`;
-  } catch (e) {
-    return `context error: ${(e as Error).message}`;
-  }
-}
