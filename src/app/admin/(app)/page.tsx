@@ -8,7 +8,8 @@ const SECTIONS = [
   { title: "Family", body: "Who can sign in and help", href: "/admin/members", ready: true },
   { title: "Ceremonies", body: "Dates, venues, dress colours", href: "/admin/ceremonies", ready: true },
   { title: "Guests", body: "Households and who's invited where", href: "/admin/guests", ready: true },
-  { title: "Send invites", body: "WhatsApp links and status", ready: false },
+  { title: "Send invites", body: "WhatsApp links and status", href: "/admin/send", ready: true },
+  { title: "Who's invited where", body: "All households × ceremonies grid", href: "/admin/matrix", ready: true },
 ];
 
 export default async function AdminHome() {

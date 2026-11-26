@@ -84,3 +84,15 @@ export function parsePaste(text: string, defaultSide: Side = "common"): ImportRo
   });
   return rows;
 }
+
+/** Fill the wedding's invite message template; {name} and {link} are replaced. */
+export function fillMessage(template: string, name: string, link: string): string {
+  const t = template.trim() || "Namaste 🙏 You're invited. Your personal invitation: {link}";
+  const withName = t.replaceAll("{name}", name);
+  return withName.includes("{link}") ? withName.replaceAll("{link}", link) : `${withName}\n${link}`;
+}
+
+/** wa.me link that opens WhatsApp with the message ready to send. */
+export function whatsappUrl(phoneE164: string, message: string): string {
+  return `https://wa.me/${phoneE164.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
+}

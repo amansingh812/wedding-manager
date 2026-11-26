@@ -57,3 +57,15 @@ describe("parsePaste", () => {
     expect(rows[0].side).toBe("bride");
   });
 });
+
+import { fillMessage, whatsappUrl } from "../guests";
+
+describe("WhatsApp message", () => {
+  it("fills {name} and {link}, appending the link if missing", () => {
+    expect(fillMessage("Namaste {name}! {link}", "Jha ji", "https://x/invite/a")).toBe("Namaste Jha ji! https://x/invite/a");
+    expect(fillMessage("Namaste 🙏", "A", "https://x/i")).toBe("Namaste 🙏\nhttps://x/i");
+  });
+  it("builds a wa.me link with digits only and encoded text", () => {
+    expect(whatsappUrl("+9779812345678", "Hi & bye")).toBe("https://wa.me/9779812345678?text=Hi%20%26%20bye");
+  });
+});
