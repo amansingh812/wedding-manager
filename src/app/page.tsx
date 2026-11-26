@@ -42,7 +42,11 @@ export default async function Home() {
     <main className="bg-ivory text-ink">
       {/* 1 · Shree Ganesh hero */}
       <section className="relative flex min-h-svh flex-col items-center justify-between overflow-hidden bg-night px-6 pb-10 pt-8 text-center text-ivory">
-        <Image src="/images/ganesh-courtyard.jpg" alt="Lord Ganesh in a temple courtyard with marigolds and diyas" fill priority sizes="100vw" className="object-cover object-[center_30%]" />
+        {/* blurred copy fills wide screens; the sharp photo keeps its natural width */}
+        <Image src="/images/ganesh-courtyard.jpg" alt="" aria-hidden fill sizes="100vw" className="hidden scale-110 object-cover opacity-60 blur-2xl sm:block" />
+        <div className="absolute inset-y-0 left-1/2 w-full -translate-x-1/2 sm:max-w-[620px]">
+          <Image src="/images/ganesh-courtyard.jpg" alt="Lord Ganesh in a temple courtyard with marigolds and diyas" fill priority sizes="(max-width: 640px) 100vw, 620px" className="object-cover object-[center_30%] sm:[mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent)]" />
+        </div>
         <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(27,11,16,.75)_0%,rgba(27,11,16,.15)_30%,rgba(27,11,16,.35)_55%,rgba(27,11,16,.95)_100%)]" />
         <p lang="sa" className="relative font-deva text-2xl text-gold-light drop-shadow sm:text-3xl">॥ श्री गणेशाय नमः ॥</p>
         <div className="relative w-full max-w-xl">
@@ -97,7 +101,7 @@ export default async function Home() {
       {/* 4 · Ceremonies */}
       <section id="ceremonies" className="scroll-mt-4 bg-[linear-gradient(180deg,#3a0a0c,#1b0b10)] px-6 py-16 text-ivory">
         <div className="mx-auto max-w-5xl">
-          <p className="text-center text-xs uppercase tracking-[.35em] text-gold-light">विवाह उत्सव</p>
+          <p lang="ne" className="text-center font-deva text-lg text-gold-light">विवाह उत्सव</p>
           <h2 className="mt-2 text-center font-display text-4xl">The celebrations</h2>
           <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {ceremonies.map((c) => (
