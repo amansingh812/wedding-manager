@@ -55,7 +55,7 @@ Reference docs:
 ## Phase 4 — Dashboard, checklists, ledger
 | # | Stage | Status |
 |---|---|---|
-| 4.1 | Overview: countdown, RSVP ring, KPIs, per-ceremony heads, nudges, blessings | ⬜ |
+| 4.1 | Dashboard: countdown hero, family count (by side, people), invitations sent/opened, next ceremony, image shortcuts. Per-ceremony headcount dropped (user) | ✅ |
 | 4.2 | Ceremony checklists + starter templates + My items / Overdue | ⬜ |
 | 4.3 | Expense ledger | ⬜ |
 | 4.4 | CSV exports (plate counts, guests, expenses) | ⬜ |

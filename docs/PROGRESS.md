@@ -108,3 +108,7 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Critical fix: paste-import did 2 DB calls per row → would fail past ~20 rows on Cloudflare free plan (50 subrequests/request). Now 2 calls total. Verified live: 40 households + 240 invitations in one go. Test rows deleted.
 - Reviewed OK: every action checks membership + wedding scope (RLS backs it); notes never reach guests; WhatsApp text encoded.
 - Walkthrough recorded (guest invite → admin home → paste 40 → guests → grid → send → ceremonies): wedding-manager-walkthrough.gif in user's Downloads.
+
+## 2026-11-26 — Admin home + Send page redesign
+- Dashboard with Higgsfield images (kohbar hero, hands/diyas/tilak/mehendi tiles). Family count only — no per-ceremony headcount (user decision).
+- Send: diyas header, WhatsApp-style preview with the OG link card. "Opened" now counts as sent on both pages.
