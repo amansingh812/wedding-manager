@@ -48,7 +48,7 @@ Reference docs:
 |---|---|---|
 | 3.1 | Magic-link login, members & roles (invite-only family list) | ✅ |
 | 3.2 | Ceremony editor (draft / published, "missing venue/time/map" hints; family read-only) | ✅ |
-| 3.3 | Household list, add/edit, paste from Excel | ⬜ |
+| 3.3 | Household list (search, side filter, status), add/edit with per-household ceremony ticks, paste from Excel with preview | ✅ |
 | 3.4 | Ceremony matrix (tick boxes) + group shortcuts | ⬜ |
 | 3.5 | WhatsApp Send / Resend + invite status | ⬜ |
 

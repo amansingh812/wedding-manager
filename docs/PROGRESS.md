@@ -92,3 +92,9 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Ceremonies: http map link rejected with message; Reception 18:00→18:30 showed on /invite/office-… immediately; restored to 18:00.
 - Fixed: form lost all typed values after a validation error (React resets forms) — now refills.
 - Not tested: sign out (would end the user's session); family-role read-only view (needs a 2nd account).
+
+## 2026-11-26 — Phase 3.3 guest list (live-tested)
+- Paste import: header skipped; "981-234 5678" → +9779812345678, "+91 70123 45678" → +917012345678; duplicate "Jha Family" and bad row (phone 12345, side "uncle") skipped with reasons; 2 added with the chosen 5 ceremonies.
+- Edit: bad phone rejected, typed values + ticks kept. New invite link rendered its ceremonies. Two-step remove; removed link → 404. Test rows cleaned up.
+- 7 new unit tests (phone, side, slug, paste parsing) — 17 total.
+- Not covered by 3.3: the all-households × ceremonies grid (3.4).
