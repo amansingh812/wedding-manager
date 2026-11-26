@@ -21,7 +21,8 @@ export default function SendList({ rows, template, siteUrl, isAdmin }: { rows: S
   const [state, action, pending] = useActionState<FormState, FormData>(saveInviteMessage, {});
 
   const sentAt = (r: SendRow) => sent[r.id] ?? r.sentAt;
-  const shown = rows.filter((r) => filter === "all" || !sentAt(r));
+  const reached = (r: SendRow) => Boolean(sentAt(r)) || r.openCount > 0; // opened = they got it
+  const shown = rows.filter((r) => filter === "all" || !reached(r));
   const preview = fillMessage(message, rows[0]?.name ?? "Sharma Family", `${siteUrl}/invite/${rows[0]?.slug ?? "example"}`);
 
   async function send(r: SendRow) {
@@ -37,7 +38,7 @@ export default function SendList({ rows, template, siteUrl, isAdmin }: { rows: S
     if (res.ok && res.sentAt) setSent((p) => ({ ...p, [r.id]: res.sentAt! }));
   }
 
-  const done = rows.filter((r) => sentAt(r)).length;
+  const done = rows.filter(reached).length;
   return (
     <div className="space-y-6">
       <form action={action} className="space-y-2 rounded-2xl border border-sand bg-white p-5">
@@ -94,8 +95,8 @@ export default function SendList({ rows, template, siteUrl, isAdmin }: { rows: S
                 </span>
                 {r.phone ? (
                   <button type="button" onClick={() => send(r)} disabled={r.ceremonies === 0}
-                    className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold disabled:opacity-40 ${s ? "border border-sand bg-white text-ink" : "bg-[#1f7a4d] text-white"}`}>
-                    {s ? "Resend" : "Send on WhatsApp"}
+                    className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold disabled:opacity-40 ${reached(r) ? "border border-sand bg-white text-ink" : "bg-[#1f7a4d] text-white"}`}>
+                    {reached(r) ? "Resend" : "Send on WhatsApp"}
                   </button>
                 ) : (
                   <button type="button" onClick={() => copy(r)} disabled={r.ceremonies === 0}

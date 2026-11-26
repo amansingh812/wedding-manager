@@ -21,8 +21,8 @@ export default async function SendPage() {
   return (
     <>
       <section className="relative mb-6 overflow-hidden rounded-3xl bg-night px-6 py-8 text-ivory">
-        <Image src="/images/diyas.jpg" alt="" fill priority sizes="720px" className="object-cover opacity-55" />
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,11,16,.9),rgba(27,11,16,.35))]" />
+        <Image src="/images/diyas.jpg" alt="" fill priority sizes="720px" className="object-cover object-[center_60%] opacity-90" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,11,16,.85)_0%,rgba(27,11,16,.4)_60%,rgba(27,11,16,0)_100%)]" />
         <div className="relative">
           <h1 className="font-display text-4xl">Send invites</h1>
           <p className="mt-1 max-w-md text-ivory/80">Each button opens WhatsApp with the message ready. Press send in WhatsApp; we mark it sent here.</p>
