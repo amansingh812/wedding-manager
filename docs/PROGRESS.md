@@ -123,3 +123,9 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Fixed: checklist owner must be a family member. Expense edit shows 1,50,000 not 150000.
 - Open for Phase 6: demo links visible on home (SHOW_DEMO_LINKS=1) + demo households in DB; checklist delete has no confirm (minor).
 - STATUS.md rewritten to current state.
+
+## 2026-11-26 — Phase 5 home page (live)
+- Public page reads only safe fields via getPublicSite() (published ceremonies; no address, map, guest data).
+- Home text lives in weddings.home (0006, applied) so code stays generic. Not yet editable in admin.
+- Fixed in review: blurry hero on desktop (566px image) → sharp centre + blurred sides; letter-spacing broke Devanagari.
+- Phone-width screenshot not taken (Chrome window would not resize); layout is mobile-first.

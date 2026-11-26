@@ -1,6 +1,6 @@
 # Project status — Wedding Manager
 
-_Last updated: 26 Nov 2026 · Phases 0–4 done, live at https://wedding-manager.amanpd0.workers.dev_
+_Last updated: 26 Nov 2026 · Phases 0–5 done, live at https://wedding-manager.amanpd0.workers.dev_
 
 One page to see what's done, what's pending and what's waiting on someone.
 
@@ -13,8 +13,8 @@ One page to see what's done, what's pending and what's waiting on someone.
 | 2 | Supabase + Cloudflare Workers, live site | ✅ Done (rate limits: see below) |
 | 3 | Family admin: login, ceremonies, guests, Excel paste, invite grid, WhatsApp send | ✅ Done |
 | 4 | Dashboard (family count), checklists, expenses, CSV downloads | ✅ Done |
-| 5 | Public home page | ⬜ Next |
-| 6 | Launch hardening, domain, family test, send invites | ⬜ |
+| 5 | Public home page | ✅ Done |
+| 6 | Launch hardening, domain, family test, send invites | ⬜ Next |
 
 ## ⬜ Still to build
 

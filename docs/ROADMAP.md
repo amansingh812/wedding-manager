@@ -63,7 +63,7 @@ Reference docs:
 ## Phase 5 — Public home page
 | # | Stage | Status |
 |---|---|---|
-| 5.1 | Hero video, countdown, story, two cultures, ceremonies, venues, footer — keep the Shree Ganesh opening already on the placeholder home | ⬜ |
+| 5.1 | Public home: Shree Ganesh hero + live countdown, welcome, two traditions (Maithil/Pahadi), celebrations (names, dates, time, city — no addresses/maps), Mithila blessing, footer. Text in `weddings.home` (migration 0006) | ✅ |
 
 ## Phase 6 — Launch hardening
 | # | Stage | Status |
