@@ -14,14 +14,8 @@
   // non-secret runtime settings (the Supabase service key is a dashboard Secret)
   "vars": {
     "SUPABASE_URL": "https://uzmzuwcpykegddokhybd.supabase.co",
-    "SITE_URL": "https://wedding-manager.amanpd0.workers.dev",
-    "SHOW_DEMO_LINKS": "1"
+    "SITE_URL": "https://wedding-manager.amanpd0.workers.dev"
   },
-  // per-IP limits: invite opens / calendar 60 per minute, RSVP saves 10 per minute
-  "ratelimits": [
-    { "name": "INVITE_LIMITER", "namespace_id": "1001", "simple": { "limit": 60, "period": 60 } },
-    { "name": "RSVP_LIMITER", "namespace_id": "1002", "simple": { "limit": 10, "period": 60 } }
-  ],
   "workers_dev": true,
   "preview_urls": true
 }

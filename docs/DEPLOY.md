@@ -32,7 +32,6 @@ Checked: compressed worker is ~1.1 MiB (free limit 3 MiB); all e2e tests pass on
    | `SUPABASE_URL` | Text | `https://uzmzuwcpykegddokhybd.supabase.co` |
    | `SUPABASE_SERVICE_ROLE_KEY` | **Secret** | from Supabase |
    | `SITE_URL` | Text | `https://wedding-manager.amanpd0.workers.dev` |
-   | `SHOW_DEMO_LINKS` | Text | `1` while testing, `0` before sending invites |
 4. Deploy. Every push to `main` redeploys automatically.
 
 Test: open `https://wedding-manager.<your-subdomain>.workers.dev/invite/sharma-parivar-9k4m2x` on your phone.

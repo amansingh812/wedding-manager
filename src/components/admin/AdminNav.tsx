@@ -25,6 +25,7 @@ const LINKS: { href: string; label: string; icon: keyof typeof I; exact?: boolea
   { href: "/admin/checklists", label: "Checklists", icon: "checklists" },
   { href: "/admin/expenses", label: "Expenses", icon: "expenses" },
   { href: "/admin/members", label: "Family", icon: "family" },
+  { href: "/admin/site", label: "Home page text", icon: "site" },
 ];
 
 function Icon({ name }: { name: keyof typeof I }) {

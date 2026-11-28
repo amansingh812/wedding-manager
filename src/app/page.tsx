@@ -7,7 +7,7 @@ import { seedHouseholds } from "@/lib/data/seed";
 import { daysUntil, formatAd, formatAdLong } from "@/lib/format";
 import type { PublicCeremony } from "@/lib/types";
 
-// Read data + SHOW_DEMO_LINKS at request time (Cloudflare runtime), not at build.
+// Read data at request time (Cloudflare runtime), not at build.
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,7 +31,7 @@ const PETALS = [
 
 export default async function Home() {
   const site = await getStore().getPublicSite().catch(() => null);
-  const showDemo = process.env.NODE_ENV !== "production" || process.env.SHOW_DEMO_LINKS === "1";
+  const showDemo = process.env.NODE_ENV !== "production"; // demo invite links: local development only
 
   if (!site) {
     return (

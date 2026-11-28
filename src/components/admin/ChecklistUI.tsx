@@ -14,6 +14,7 @@ const KIND_TONE: Record<string, string> = { buy: "bg-[#fdf0dc] text-[#8a5a12]", 
 
 export function ItemRow({ item, today, canDelete }: { item: Item; today: string; canDelete: boolean }) {
   const [done, setDone] = useState(item.done);
+  const [confirming, setConfirming] = useState(false);
   const [, start] = useTransition();
   const overdue = !done && item.due && item.due < today;
   return (
@@ -40,9 +41,15 @@ export function ItemRow({ item, today, canDelete }: { item: Item; today: string;
           {item.due && <span className={overdue ? "font-semibold text-sindoor" : ""}>{overdue ? "Overdue · " : "Due "}{new Date(item.due + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "short" })}</span>}
         </p>
       </div>
-      {canDelete && (
-        <form action={deleteItem}><input type="hidden" name="id" value={item.id} /><button aria-label={`Delete ${item.title}`} className="px-1 text-quiet hover:text-sindoor">×</button></form>
-      )}
+      {canDelete && (confirming ? (
+        <form action={deleteItem} className="flex shrink-0 items-center gap-2 text-xs">
+          <input type="hidden" name="id" value={item.id} />
+          <button className="rounded-full bg-sindoor px-3 py-1.5 font-semibold text-[#FFF7E8]">Delete</button>
+          <button type="button" onClick={() => setConfirming(false)} className="font-semibold text-[#6B5444]">Keep</button>
+        </form>
+      ) : (
+        <button type="button" onClick={() => setConfirming(true)} aria-label={`Delete ${item.title}`} className="flex size-9 shrink-0 items-center justify-center rounded-full text-lg text-quiet hover:bg-[#FBEAEA] hover:text-sindoor">×</button>
+      ))}
     </li>
   );
 }
