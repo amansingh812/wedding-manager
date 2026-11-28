@@ -57,7 +57,7 @@ export default async function Home() {
       <header className="relative min-h-[720px] overflow-hidden bg-night sm:h-[880px]">
         <video
           className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
-          src="/video/home-hero.mp4" poster="/images/home-hero.jpg"
+          src="/video/home-hero.mp4" poster="/images/home-hero.webp"
           autoPlay muted loop playsInline preload="metadata"
           aria-label="Mithila-painted wall beside a marigold-draped Nepali mandap at dusk"
         />
@@ -103,9 +103,9 @@ export default async function Home() {
       {/* 3 · Story */}
       <section id="story" className="mx-auto grid max-w-[1280px] scroll-mt-4 items-end gap-6 px-6 pb-28 sm:grid-cols-3 sm:px-8">
         {[
-          { src: "/images/story-chiya.jpg", alt: "Two glasses of chiya on a rooftop at sunrise", cap: "It started over chiya.", arch: true },
-          { src: "/images/hands.jpg", alt: "Bride's hands with mehendi holding a sindoor box", cap: "Then came the yes.", arch: false },
-          { src: "/images/story-paag.jpg", alt: "Mithila paag and a red Nepali bridal sari linked by a marigold mala", cap: "Now, forever.", arch: true },
+          { src: "/images/story-chiya.webp", alt: "Two glasses of chiya on a rooftop at sunrise", cap: "It started over chiya.", arch: true },
+          { src: "/images/hands.webp", alt: "Bride's hands with mehendi holding a sindoor box", cap: "Then came the yes.", arch: false },
+          { src: "/images/story-paag.webp", alt: "Mithila paag and a red Nepali bridal sari linked by a marigold mala", cap: "Now, forever.", arch: true },
         ].map((f) => (
           <figure key={f.cap} className="flex flex-col gap-3.5">
             <div className={`relative aspect-[4/5] overflow-hidden ${f.arch ? "rounded-[220px_220px_20px_20px]" : "rounded-[20px]"}`}>
@@ -120,7 +120,7 @@ export default async function Home() {
       <section aria-label="Two cultures" className="grid sm:grid-cols-2">
         {[
           { img: "/images/kohbar.jpg", alt: "Mithila kohbar wall painting with lotus, bamboo and fish", label: ["Groom", home.groomTradition, home.groomFrom], name: home.groomFamily ?? w.groomName },
-          { img: "/images/hands.jpg", alt: "Nepali bride's hands with mehendi, pote and gold bangles", label: ["Bride", home.brideTradition, home.brideFrom], name: home.brideFamily ?? w.brideName },
+          { img: "/images/hands.webp", alt: "Nepali bride's hands with mehendi, pote and gold bangles", label: ["Bride", home.brideTradition, home.brideFrom], name: home.brideFamily ?? w.brideName },
         ].map((f) => (
           <div key={f.img} className="relative min-h-[420px] overflow-hidden sm:min-h-[560px]">
             <Image src={f.img} alt={f.alt} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" />
@@ -160,7 +160,7 @@ export default async function Home() {
       {/* 6 · Venue */}
       {mainVenue && (
         <section id="venue" className="relative flex min-h-[640px] scroll-mt-0 items-end overflow-hidden">
-          <Image src="/images/venue-garden.jpg" alt="Party palace garden lit with lanterns and marigold arches" fill sizes="100vw" className="object-cover" />
+          <Image src="/images/venue-garden.webp" alt="Party palace garden lit with lanterns and marigold arches" fill sizes="100vw" className="object-cover" />
           <div className="relative mx-auto box-border w-full max-w-[1280px] px-6 pb-14 sm:px-8">
             <div className="flex max-w-[440px] flex-col gap-3 rounded-3xl bg-[rgba(251,246,236,.95)] p-8">
               <span className="text-xs uppercase tracking-[2.5px] text-[#8A6A3B]">{mainVenue.name} · {mainVenue.dateBs} · {shortAd(mainVenue.eventDate)}</span>
@@ -182,7 +182,7 @@ export default async function Home() {
       {/* 7 · Personal invitation */}
       <section className="mx-auto grid max-w-[1280px] items-center gap-10 px-6 py-24 sm:grid-cols-[1fr_1.1fr] sm:gap-16 sm:px-8">
         <div className="relative aspect-[4/5] overflow-hidden rounded-[220px_220px_24px_24px] shadow-xl sm:max-h-[560px]">
-          <Image src="/images/diyas-steps.jpg" alt="Lit diyas on temple steps" fill sizes="(max-width: 640px) 100vw, 560px" className="object-cover object-[center_70%]" />
+          <Image src="/images/diyas-steps.webp" alt="Lit diyas on temple steps" fill sizes="(max-width: 640px) 100vw, 560px" className="object-cover object-[center_70%]" />
         </div>
         <div className="flex flex-col gap-5">
           <p className="text-xs uppercase tracking-[3px] text-[#8A6A3B]">For our guests</p>
@@ -200,7 +200,7 @@ export default async function Home() {
 
       {/* 8 · Footer */}
       <footer className="relative flex h-[420px] items-end overflow-hidden">
-        <Image src="/images/footer-terai.jpg" alt="Mustard fields and a river in the Terai at sunset" fill sizes="100vw" className="object-cover" />
+        <Image src="/images/footer-terai.webp" alt="Mustard fields and a river in the Terai at sunset" fill sizes="100vw" className="object-cover" />
         <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(20,8,14,0)_30%,rgba(20,8,14,.8)_100%)]" />
         <div className="relative mx-auto box-border flex w-full max-w-[1280px] flex-wrap items-end justify-between gap-4 px-6 pb-10 sm:px-8">
           <div>

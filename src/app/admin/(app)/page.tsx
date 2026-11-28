@@ -48,7 +48,7 @@ export default async function AdminHome() {
   const kpis = [
     { label: "Households invited", value: n, sub: `${groom} groom · ${bride} bride side` },
     { label: "Opened their link", value: opened, sub: `${pct}% of invites` },
-    { label: "Not sent yet", value: notSent, sub: notSent ? "waiting on WhatsApp" : "everyone has it" },
+    { label: "Not sent yet", value: notSent, sub: n === 0 ? "add guests first" : notSent ? "waiting on WhatsApp" : "everyone has it" },
     { label: "People invited", value: people, sub: "max guests, all families" },
   ];
 
@@ -126,7 +126,7 @@ export default async function AdminHome() {
             <h2 className="font-display text-[26px] font-semibold text-maroon">Needs a nudge</h2>
             <span className="text-[13px] text-[#6B5444]">{n - opened} haven&apos;t opened</span>
           </div>
-          {nudges.length === 0 ? <p className="text-sm text-[#6B5444]">Everyone has opened their invitation. 🎉</p> : nudges.map((h, i) => (
+          {n === 0 ? <p className="text-sm text-[#6B5444]">No guests yet. <Link href="/admin/guests/import" className="font-semibold">Paste your list from Excel</Link> to get started.</p> : nudges.length === 0 ? <p className="text-sm text-[#6B5444]">Everyone has opened their invitation. 🎉</p> : nudges.map((h, i) => (
             <div key={h.id} className="flex items-center gap-3 border-t border-[#F0E4CC] py-2.5">
               <div aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-[#FFF7E8]" style={{ background: AVATAR[i % AVATAR.length] }}>{initials(h.display_name)}</div>
               <div className="flex min-w-0 flex-1 flex-col">

@@ -135,3 +135,13 @@ The phase/stage checklist lives in [`ROADMAP.md`](./ROADMAP.md).
 - Data: bride Ashika (Rayamajhi), title "Nirajan & Ashika", hashtag #NirajanWedsAshika, nickname Ashiran, families Singh / Rayamajhi.
 - Venues: Tilak & Matkor — groom's village, Sitapur, Mirchaiya, Siraha · Haldi & Mehendi — both family homes · Janti/Bibah — hotel in Gaighat (TBC) · Reception — City Palace – Hotel & Resort, Biratnagar.
 - Public page shows venue names only for Bibah + Reception; home ceremonies show city only.
+
+## 2026-11-28 — Phase 6 (part 1)
+- Rate limit: Postgres fixed-window limiter (0007, applied). Live test from one browser: 60 × 404 then 10 × 429. Note: my workspace's requests rotate through many IPs, which is why earlier IP-based tests (incl. Cloudflare's limiter) never blocked.
+- Security: supabase/tests/security_check.sql — 27 checks as signed-out visitor and signed-in stranger, all PASS (no reads, no writes, can't add themselves as admin, can't call server functions).
+- Demo households (Sharma, Jha, Office) deleted from Supabase; demo links shown only in local dev; SHOW_DEMO_LINKS removed.
+- New: Admin → Home page text (nickname, hashtag, blessing, family names/traditions/places); validated, admin-only.
+- Checklist delete asks Delete / Keep. Overview empty-state wording for 0 guests.
+- Speed: home media 2.3 MB total, ~0.6 MB before scrolling (rest lazy-loads). 7 photos converted to WebP (−25%).
+- Workflow: every change built + tested locally first (21 unit, 6 e2e, phone-width screenshot) before push.
+- Not verified: admin at phone width (Chrome window won't resize; admin needs sign-in so local Playwright can't reach it).
